@@ -4,7 +4,7 @@
 
 # Carpeta de trabajo de pruebas. Todo lo que un skill crea vive siempre
 # bajo CV/ (ver plugins/cv/reference/workspace-layout.md), así que ignorar
-# esta carpeta alcanza; no hace falta repetir cvs/, postulaciones/, etc. sueltos.
+# esta carpeta alcanza; no hace falta repetir postulaciones/, etc. sueltos.
 /CV/
 
 # CVs generados fuera de la carpeta de trabajo

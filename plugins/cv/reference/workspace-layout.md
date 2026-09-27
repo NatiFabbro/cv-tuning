@@ -16,21 +16,23 @@ CV/
 ├── config.md              # ajustes del plugin (ver abajo)
 ├── historial-perfiles/    # versiones anteriores de perfil.md, una por cada vez que se reemplazó
 │   └── perfil_2026-09-20.md
-├── cvs/                   # CVs generados, una subcarpeta por postulación
-│   └── 2026-09-26_acme_disenadora-ux/
-│       ├── CV_Nombre-Apellido_Acme.docx
-│       └── CV_Nombre-Apellido_Acme.pdf
-└── postulaciones/         # un registro por ejecución de tune (ver postulaciones-format.md)
-    └── 2026-09-26_acme_disenadora-ux.md
+└── postulaciones/         # una subcarpeta por cada vez que se corrió tune, con todo junto
+    └── 2026-09-26_acme_disenadora-ux/
+        ├── postulacion.md          # el análisis (ver postulaciones-format.md)
+        ├── job-description.md     # el detalle de la oferta tal como se recibió, completo
+        ├── CV_Nombre-Apellido_Acme.docx
+        └── CV_Nombre-Apellido_Acme.pdf
 ```
+
+El registro, el detalle de la oferta y el CV de una misma postulación viven **en la misma carpeta**, no en árboles separados: así queda claro de un vistazo qué archivos pertenecen a qué postulación, y solo hay un lugar donde chequear colisiones de nombre (la carpeta), en vez de varios que podrían desincronizarse.
 
 ## Convención de nombres
 
-- **Carpeta y registro:** `AAAA-MM-DD_empresa_puesto`, con `empresa` y `puesto` en minúsculas, espacios reemplazados por guiones y sin diacríticos: quitá tildes (á, é, í, ó, ú) y convertí `ñ` → `n`, `ü` → `u` (por ejemplo, "Diseñadora UX" → `disenadora-ux`). Para otros idiomas, aplicá el mismo criterio con el diacrítico equivalente.
+- **Carpeta de la postulación (`CV/postulaciones/<...>`):** `AAAA-MM-DD_empresa_puesto`, con `empresa` y `puesto` en minúsculas, espacios reemplazados por guiones y sin diacríticos: quitá tildes (á, é, í, ó, ú) y convertí `ñ` → `n`, `ü` → `u` (por ejemplo, "Diseñadora UX" → `disenadora-ux`). Para otros idiomas, aplicá el mismo criterio con el diacrítico equivalente. Si la carpeta ya existe (misma fecha, empresa y puesto), agregá `_2`, `_3`… No pises nada. Esta es la **única** colisión que hay que chequear: el registro y el CV van adentro, ya resuelto.
 - **Largo máximo:** ~50 caracteres cada uno (`empresa` y `puesto`). Si se pasa, cortá en el último guion completo antes del límite (nunca a mitad de palabra); por ejemplo, `analista-de-datos-para-el-area-de-riesgo` (41) se deja así, pero algo más largo se corta en el guion anterior a los 50.
-- **Archivos del CV:** `CV_Nombre-Apellido_Empresa.docx` / `.pdf`. Mismas reglas de diacríticos y largo que arriba.
-- Si la carpeta ya existe (misma fecha, empresa y puesto), agregá `_2`, `_3`… No pises nada.
-- **Historial de perfiles:** `perfil_AAAA-MM-DD.md` (la fecha del día en que se reemplazó). Si ya existe uno con esa fecha (por ejemplo, dos cambios el mismo día), agregá `_2`, `_3`… igual que con las carpetas de CVs.
+- **Registro:** siempre `postulacion.md`, adentro de la carpeta de la postulación. El nombre no repite fecha/empresa/puesto: eso ya lo dice la carpeta que lo contiene.
+- **Archivos del CV:** `CV_Nombre-Apellido_Empresa.docx` / `.pdf`, adentro de la misma carpeta. Mismas reglas de diacríticos y largo que arriba.
+- **Historial de perfiles:** `perfil_AAAA-MM-DD.md` (la fecha del día en que se reemplazó), en `CV/historial-perfiles/`. Si ya existe uno con esa fecha (por ejemplo, dos cambios el mismo día), agregá `_2`, `_3`…
 
 ## `perfil.md` y su historial
 
@@ -38,6 +40,8 @@ CV/
 
 1. Antes de escribir la versión nueva, **mové** (no copies y dejes ambas) el contenido vigente de `perfil.md` a `CV/historial-perfiles/perfil_AAAA-MM-DD.md`, con el nombre de arriba.
 2. Recién ahí escribí la versión nueva en `perfil.md`.
+
+**Nunca uses otro nombre o ubicación para este archivado** (por ejemplo `CV/perfil.anterior.md`, en la raíz): siempre es `CV/historial-perfiles/` con el patrón `perfil_AAAA-MM-DD.md`.
 
 Esto **no necesita confirmación de la persona**: cada versión anterior queda en su propio archivo, con su propia fecha, así que nunca hay nada que sobrescribir ni por qué preguntar. La confirmación que sí hace falta (mostrar el resumen y esperar un sí antes de guardar) es sobre el **contenido nuevo**, no sobre este archivado.
 
@@ -63,7 +67,7 @@ version-layout: 1
 
 ## Idempotencia
 
-Antes de crear cualquier archivo, verificá si ya existe. Nunca pises `config.md`, ni nada dentro de `cvs/`, `postulaciones/` o `historial-perfiles/` sin mostrar qué hay y recibir un sí explícito. `perfil.md` es la única excepción: se reemplaza según "`perfil.md` y su historial" de arriba, sin preguntar por el archivado (la persona sí confirma el contenido nuevo antes de guardar, en cada skill).
+Antes de crear cualquier archivo, verificá si ya existe. Nunca pises `config.md`, ni nada dentro de `postulaciones/` o `historial-perfiles/` sin mostrar qué hay y recibir un sí explícito. `perfil.md` es la única excepción: se reemplaza según "`perfil.md` y su historial" de arriba, sin preguntar por el archivado (la persona sí confirma el contenido nuevo antes de guardar, en cada skill).
 
 ## Verificación de guardado
 

@@ -63,7 +63,7 @@ Preguntá: "¿Lo guardo así?". **No escribas nada hasta recibir un sí claro.**
 
 ## 5. Guardar
 
-1. Antes de modificar, archivá el perfil vigente en `CV/historial-perfiles/` con la convención de `workspace-layout.md` (nunca hace falta preguntar por esto: cada versión queda en su propio archivo con fecha, no se pisa nada).
+1. Antes de modificar, **mové** el contenido vigente de `perfil.md` a `CV/historial-perfiles/perfil_AAAA-MM-DD.md` (la fecha de hoy; si ya existe uno con esa fecha, agregá `_2`, `_3`…). Nunca hace falta preguntar por esto. **Siempre esa carpeta y ese patrón de nombre — nunca `CV/perfil.anterior.md` ni ninguna otra variante.** Más detalle en `workspace-layout.md`, sección "`perfil.md` y su historial".
 2. Escribí `CV/perfil.md` con los cambios, respetando el esquema.
 3. Verificá el guardado según `workspace-layout.md` ("Verificación de guardado"): releé el archivo de cero y confirmá que refleja exactamente lo confirmado. Si no podés confirmarlo así, no digas que se guardó: decíselo a la persona y reintentá.
 

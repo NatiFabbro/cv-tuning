@@ -51,7 +51,7 @@ if (!changelog.includes(`## [${plugin.version}]`)) {
 
 // 4. Symlinks y contenido de plugins/cv/
 const pluginFiles = walk(join(root, 'plugins/cv'));
-const textExt = /\.(md|json|txt|ps1|mjs|js)$/;
+const textExt = /\.(md|json|txt|ps1|mjs|js|py)$/;
 const absPath = /(^|[\s"'(`=])([A-Za-z]:\\|\/Users\/|\/home\/|\/sessions\/|\/mnt\/)[^\s"'`)]*/m;
 for (const f of pluginFiles) {
   if (!textExt.test(f)) continue;
@@ -79,6 +79,7 @@ for (const f of [
   'reference/ats-guidelines.md', 'reference/postulaciones-format.md', 'reference/locales.md',
   'reference/template-styles.md', 'reference/cv-structure.md', 'reference/external-links.md',
   'reference/voz-y-persona.md', 'assets/templates/ats-clean.docx', 'assets/templates/visual.docx',
+  'assets/scripts/build_cv.py',
 ]) if (!existsSync(join(root, 'plugins/cv', f))) fail(`Falta plugins/cv/${f}`);
 
 // 6. Nada de datos personales evidentes en el repo: emails fuera de example.com

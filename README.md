@@ -1,22 +1,19 @@
 # cv-tuning
 
-Un plugin de Claude para armar tu perfil profesional una sola vez y **afinar tu CV para cada oferta de trabajo**, sin inventar nada que no esté en tu perfil.
-
-> **Estado: v1.1.1, en prueba activa en Cowork.** Los pasos de instalación siguen la [documentación oficial de Cowork](https://claude.com/docs/cowork/guide/plugins); si tu versión de la interfaz muestra otros nombres, avisame para corregirlo.
+Un plugin de Claude para armar tu perfil profesional una sola vez y **afinar tu CV para cada oferta de trabajo**.
 
 Este README tiene dos partes: una para quienes solo quieren **usar** el plugin (no hace falta saber nada técnico), y otra para quienes quieren **hacer un fork** y construir sus propias skills sobre esta misma base.
 
 ---
 
-## Instalación y uso (para cualquier persona)
-
-No hace falta saber programar ni entender de "plugins" para usar esto. Seguí estos pasos.
+## Instalación y uso 
 
 ### Cómo se usa (3 pasos)
 
 1. **Instalá el plugin** en Cowork: `Customize` → `Plugins` → `Add marketplace` con `NatiFabbro/cv-tuning` → buscá `cv` en `Discover` e instalalo. (Ver [Instalar y actualizar](#instalar-y-actualizar) para el detalle paso a paso.)
 2. **Armá tu perfil, una sola vez.** Conectá una carpeta de trabajo y escribí `/cv:setup`. Podés pasarle tu CV actual (PDF, Word o texto) o contarle tu experiencia si no tenés uno. Te muestra un resumen y no guarda nada hasta que digas que sí.
 3. **Adaptá tu CV a cada oferta.** Escribí `/cv:tune` y pegá el texto de la oferta, el link o una captura. Antes de generar nada, te muestra qué va a destacar y qué te falta para el puesto. Cuando confirmás, te entrega el CV en **Word (DOCX) y PDF**.
+4. **Actualizá tu perfil** con `/cv:update-profile`. Agrega, quitá, modificá lo que quieras, vas a tener las versiones anteriores guardadas por si las necesitas.
 
 También podés pedirlo con tus palabras ("armame un CV para esta oferta"); no hace falta escribir el comando.
 
@@ -33,7 +30,7 @@ También podés pedirlo con tus palabras ("armame un CV para esta oferta"); no h
 
 **Desinstalar:** abrí el plugin `cv` en **Customize → Plugins** y tocá **Remove**.
 
-Superficie soportada: **Cowork primero**. Claude Code y otras IAs quedan para más adelante.
+Superficie soportada: **Cowork**. Claude Code y otras IAs quedan para más adelante.
 
 ### Qué hace cada comando
 
@@ -53,7 +50,7 @@ Superficie soportada: **Cowork primero**. Claude Code y otras IAs quedan para m�
 
 ### Tus datos y privacidad
 
-- Tus datos viven **en tu carpeta de trabajo**, en archivos de texto (`CV/perfil.md`, `CV/config.md`, `CV/cvs/`, `CV/postulaciones/`). Podés abrirlos, editarlos o borrarlos cuando quieras.
+- Tus datos viven **en tu carpeta de trabajo**, en archivos de texto (`CV/perfil.md`, `CV/config.md`, `CV/postulaciones/`, una subcarpeta por cada CV que generás con su registro, el detalle de la oferta, el `.docx` y el `.pdf`). Podés abrirlos, editarlos o borrarlos cuando quieras.
 - El plugin **no tiene servidores propios, no envía datos a ningún lado ni recopila estadísticas.** Los archivos no salen de tu carpeta por obra del plugin.
 - Cuando lo usás, tu perfil y las ofertas que pegues **las procesa Claude** dentro de tu sesión, según las condiciones de tu cuenta de Claude. Si no querés que un dato pase por ahí, no lo cargues en el perfil o marcalo en "No mostrar".
 - Este repositorio no contiene datos de nadie: todo lo que se usa para pruebas es inventado.
@@ -74,7 +71,9 @@ plugins/cv/                         El plugin (todo lo compartido vive acá dent
 ├── .claude-plugin/plugin.json
 ├── skills/{setup,tune,update-profile}/SKILL.md
 ├── reference/                      Contratos compartidos (perfil, honestidad, ATS, layout…)
-└── assets/templates/               Plantillas DOCX (ats-clean, visual)
+└── assets/
+    ├── templates/                  Plantillas DOCX (ats-clean, visual)
+    └── scripts/build_cv.py         Arma el DOCX desde JSON (solo librería estándar de Python)
 evals/                              Perfiles y ofertas sintéticos + casos de prueba
 tools/                              Scripts de desarrollo (plantillas, chequeos de release)
 docs/                               Plan de implementación y notas de release

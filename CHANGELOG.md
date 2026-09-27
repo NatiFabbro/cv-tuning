@@ -4,6 +4,26 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). E
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-09-27
+
+Fixes y features de la tercera ronda de pruebas manuales en Cowork, más el script de generación de DOCX.
+
+### Added
+- Script `assets/scripts/build_cv.py`: arma el DOCX desde un JSON de contenido (solo librería estándar de Python, sin `python-docx`). Reemplaza el método de rellenar la plantilla a mano en `/cv:tune`, con verificación propia (relee el archivo guardado) antes de darlo por bueno.
+- `/cv:setup` chequea en silencio si hay Python disponible y, si no, lo ofrece como mejora opcional en el cierre (nunca bloquea el setup ni el armado del CV): si la persona acepta, la guía paso a paso a instalarlo (`winget` en Windows, `brew` o instalador oficial en Mac).
+- `job-description.md` en cada carpeta de postulación: empresa, puesto, link (si la persona compartió uno) y el **texto completo** de la oferta tal como se recibió — a diferencia de `postulacion.md`, que solo guarda un análisis breve. Sirve para volver a leer la oferta más adelante sin depender de que siga disponible en el sitio original.
+
+### Changed
+- `reference/template-styles.md`: el método manual de rellenar la plantilla (edición directa del XML del `.docx`) queda como respaldo, para cuando no hay Python disponible o el script falla; ya no duplica la receta de `python-docx`, cubierta ahora por el script.
+- `CV/cvs/` y `CV/postulaciones/` se unificaron en una sola carpeta: cada postulación tiene su subcarpeta en `CV/postulaciones/<AAAA-MM-DD_empresa_puesto>/` con el registro (`postulacion.md`), el `.docx` y el `.pdf` juntos, en vez de dos árboles paralelos con el mismo nombre de carpeta/archivo. De paso, la colisión de nombres se resuelve una sola vez (a nivel de la carpeta), no en dos lugares que podían desincronizarse.
+
+### Fixed
+- El archivado del perfil (`historial-perfiles/`) volvió a crear `CV/perfil.anterior.md` en una prueba real, aunque la regla ya estaba escrita — probablemente porque el patrón exacto vivía solo en una referencia cruzada (`workspace-layout.md`) que no llegó a leerse. Ahora `setup` y `update-profile` tienen la carpeta y el patrón de nombre en línea, en el propio paso, y prohíben explícitamente el nombre viejo.
+- `assets/scripts/build_cv.py` tenía un email y un link de LinkedIn reales hardcodeados en el docstring de ejemplo; reemplazados por datos sintéticos. `tools/check-release.mjs` no lo detectó porque su chequeo de emails no miraba archivos `.py` — ahora sí.
+
+### Notes
+- En prueba activa en Cowork.
+
 ## [1.1.1] - 2026-09-27
 
 Fixes de la segunda ronda de pruebas manuales en Cowork sobre la 1.1.0.

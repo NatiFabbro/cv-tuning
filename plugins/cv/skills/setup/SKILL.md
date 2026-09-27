@@ -23,12 +23,18 @@ Los contratos compartidos están en `${CLAUDE_PLUGIN_ROOT}/reference/`. Si esa v
 
 Trabajá dentro de la **carpeta de trabajo activa de esta sesión**. Si no hay ninguna conectada, pedile a la persona que conecte una carpeta (una donde quiera guardar sus CVs) y esperá. No escribas rutas absolutas en ningún archivo; en mensajes mostrá siempre rutas relativas.
 
+## 1b. Chequeo silencioso de Python
+
+`tune` arma el CV con un script que necesita Python (ver `template-styles.md`). No es indispensable — sin él, igual se arma el CV, a mano y más lento — pero conviene saber ahora si está disponible, para ofrecer instalarlo recién en el cierre (paso 7), sin interrumpir el armado del perfil.
+
+Corré un chequeo simple (`python3 --version`, o `python --version` si el primero no existe) y guardá el resultado para el cierre. En Windows, si el comando devuelve algo como "no se encontró Python; ejecutar sin argumentos para instalar desde el Microsoft Store", **no es un Python real**: contalo como "no está instalado", no como un error. No le muestres nada de esto a la persona ahora; seguí con el resto del setup.
+
 ## 2. Ver qué hay (no pisar nada)
 
 Buscá `CV/` y dentro `perfil.md` y `config.md`.
 
 - si **No existe nada:** seguí con el paso 3.
-- si **Existe `CV/perfil.md`:** si su `version-esquema` es mayor a la que conocés (`1`), avisale a la persona que tu versión del plugin es más vieja que su perfil y frená ahí (no lo toques). Si no, contale, en una línea, qué tiene (nombre y cantidad de experiencias). Preguntale qué prefiere: (a) dejarlo como está y salir, (b) agregarle cosas (derivá a `/cv:update-profile`), o (c) rehacerlo desde cero. Solo con un sí claro a (c) seguí, y antes de escribir archivá el perfil vigente en `CV/historial-perfiles/` con la convención de `workspace-layout.md` (nunca hace falta preguntar por esto: cada versión queda en su propio archivo con fecha, no se pisa nada).
+- si **Existe `CV/perfil.md`:** si su `version-esquema` es mayor a la que conocés (`1`), avisale a la persona que tu versión del plugin es más vieja que su perfil y frená ahí (no lo toques). Si no, contale, en una línea, qué tiene (nombre y cantidad de experiencias). Preguntale qué prefiere: (a) dejarlo como está y salir, (b) agregarle cosas (derivá a `/cv:update-profile`), o (c) rehacerlo desde cero. Solo con un sí claro a (c) seguí, y antes de escribir **mové** el contenido vigente de `perfil.md` a `CV/historial-perfiles/perfil_AAAA-MM-DD.md` (la fecha de hoy; si ya existe uno con esa fecha, agregá `_2`, `_3`…). Nunca hace falta preguntar por esto. **Siempre esa carpeta y ese patrón de nombre — nunca `CV/perfil.anterior.md` ni ninguna otra variante.** Más detalle en `workspace-layout.md`, sección "`perfil.md` y su historial".
 - si **Existe `CV/` pero le falta `config.md` o alguna subcarpeta:** completá lo que falta, sin tocar lo demás, y avisale. Si `config.md` ya existe y su `version-layout` es mayor a la que conocés (`1`), no es motivo para frenar: avisá que hay un ajuste que no reconocés y usá los valores por defecto de `workspace-layout.md`.
 
 ## 3. Ingesta: ¿tiene un CV o LinkedIn?
@@ -86,7 +92,7 @@ Mostrale un **resumen legible** del perfil (no el archivo crudo): datos personal
 
 Con la confirmación:
 
-1. Creá, si no existen, `CV/`, `CV/cvs/` y `CV/postulaciones/`.
+1. Creá, si no existen, `CV/` y `CV/postulaciones/`.
 2. Escribí `CV/perfil.md` siguiendo `profile-schema.md`.
 3. Si no existe, escribí `CV/config.md` con los valores por defecto de `workspace-layout.md` (plantilla `ats-clean`, formatos `docx, pdf`, idioma "según el posting"), ajustando el idioma solo si la persona pidió uno fijo. **No guardes rutas absolutas** en ningún archivo.
 4. Verificá el guardado según `workspace-layout.md` ("Verificación de guardado"): releelo de cero, no lo des por hecho.
@@ -95,6 +101,7 @@ Con la confirmación:
 
 Decile en dos o tres frases qué se creó (con rutas relativas: `CV/perfil.md`, `CV/config.md`), citando un detalle concreto de lo que confirmaste al releer (por ejemplo, algo de su primera experiencia), no solo "listo, guardado". Contale que sus datos quedan en su carpeta y que el siguiente paso es pasarle un puesto: "Cuando tengas una oferta, escribime `/cv:tune` y pegá el texto, el link o una captura". Si quedaron pendientes, mencioná cuántos y que puede completarlos cuando quiera con `/cv:update-profile`.
 
-## Diagnóstico (temporal, hasta cerrar la Fase 2 del plan)
+**Si el chequeo del paso 1b dio que no hay Python instalado**, agregá, después de todo lo anterior, una mención breve y opcional (no la mezcles con lo esencial de arriba, ni la conviertas en un problema): algo como "Una cosa aparte, sin apuro: para armar el CV en Word uso un programita que necesita Python, y no lo tenés instalado en esta compu. No hace falta para nada de lo que ya hicimos, y sin él igual te armo el CV (un poco más manual). Si en algún momento querés, te puedo guiar a instalarlo, tarda un par de minutos. ¿Querés ahora, más adelante, o preferís no instalarlo?". Guardá lo que responda:
 
-Solo mientras se valida el plugin en Cowork, al final agregá un bloque breve "Diagnóstico" que diga: qué carpeta detectaste como carpeta de trabajo (nombre, no ruta completa), si `${CLAUDE_PLUGIN_ROOT}` se resolvió o usaste la ruta relativa, y cómo llegó la base del perfil (archivo, texto pegado, link de LinkedIn leído, link de LinkedIn bloqueado + export recibido, o ninguno). Se elimina este bloque antes del release v0.1.0.
+- **Ahora:** guiala paso a paso, un comando por vez, explicando qué hace cada uno antes de correrlo. En Windows preferí `winget install --id Python.Python.3.12 -e` (viene con Windows 10/11 actualizado, no abre navegador ni pide cuenta); si `winget` no está, mandala a `python.org/downloads` a bajar el instalador oficial y marcar la casilla "Add to PATH" durante la instalación. En Mac, `python3` puede ya estar (confirmalo primero); si no, `brew install python3` si tiene Homebrew, o si no el instalador de `python.org/downloads`. Cuando termine, verificá con un chequeo de versión (no des por hecho que funcionó) antes de decirle que ya puede pedir su primer CV con `/cv:tune`.
+- **Más adelante o no:** no insistas. Decile que puede pedírtelo cuando quiera y que mientras tanto todo sigue funcionando igual, solo que `tune` arma el CV a mano.

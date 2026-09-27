@@ -6,7 +6,7 @@ Se regeneran con `tools/build-templates.ps1`; no las edites a mano.
 
 ## Estilos
 
-El nombre del estilo es igual a su ID (es lo que busca `python-docx`).
+El nombre del estilo es igual a su ID (es el formato que espera `assets/scripts/build_cv.py`, y también `python-docx` si alguna vez se usa directo).
 
 | Estilo | Para qué |
 |---|---|
@@ -67,57 +67,28 @@ Omití las secciones sin contenido; no dejes títulos vacíos.
 
 ## Cómo rellenar (sin instalar nada)
 
+**Método preferido: `assets/scripts/build_cv.py`.** Es un script del plugin (solo librería estándar de Python, sin dependencias) que hace todo esto en un solo paso: arma el JSON de contenido (un objeto por párrafo, con `style` y `text` o `runs`; ver el encabezado del script para el formato completo y un ejemplo), y llamalo:
+
+```
+python assets/scripts/build_cv.py --template assets/templates/<plantilla>.docx --content <json> --output <salida>.docx
+```
+
+Con `--content` podés fijar `"lang"` (idioma del documento, obligatorio) y `"page_size"` (`"A4"` por defecto, `"Letter"` para EE. UU./Canadá). El script copia la plantilla, agrega los párrafos con sus estilos, arma los hipervínculos reales, ajusta el idioma y **verifica el archivo guardado releyéndolo** antes de terminar (si algo no cierra, corta con un error en vez de entregar un DOCX a medio armar). Si necesitás instalar Python para poder usarlo, no lo hagas vos: seguí el paso siguiente y decíselo a la persona.
+
+Si no hay Python disponible en el entorno (y no es el momento de instalarlo — ver `setup/SKILL.md`, chequeo de Python), seguí el método manual de abajo: hace exactamente lo mismo, a mano.
+
+### Método manual (si el script no se puede usar)
+
+Casi nunca hace falta: es lo mismo que hace `build_cv.py`, a mano. Usalo solo si el script falla por algo puntual (por ejemplo, la plantilla cambió y ya no encuentra `<w:sectPr>`) y necesitás salir del paso igual.
+
 1. Copiá la plantilla a la carpeta de salida con el nombre final; no modifiques la original.
-2. Con `python-docx` (si está disponible):
-   ```python
-   from docx import Document
-   from docx.shared import Inches
-
-   doc = Document("CV_Nombre-Apellido_Empresa.docx")   # la copia
-   # Solo EE. UU. / Canadá:
-   # s = doc.sections[0]; s.page_width, s.page_height = Inches(8.5), Inches(11)
-
-   doc.add_paragraph("Nombre Apellido", style="CVNombre")
-   doc.add_paragraph("Diseñadora UX", style="CVTitular")
-   doc.add_paragraph("Buenos Aires, Argentina | persona@example.com", style="CVContacto")
-   doc.add_paragraph("Experiencia laboral", style="CVSeccion")
-   doc.add_paragraph("Rol — Empresa", style="CVPuesto")
-   doc.add_paragraph("mar 2021 – actual · Remoto", style="CVMeta")
-   doc.add_paragraph("Logro con su métrica.", style="CVVineta")
-   doc.save("CV_Nombre-Apellido_Empresa.docx")
-   ```
-   Para que un link salga clickeable (es el comportamiento por defecto, no opcional), usá una función auxiliar, porque `python-docx` no trae una directa:
-   ```python
-   from docx.oxml.ns import qn
-   from docx.oxml import OxmlElement
-
-   def add_hyperlink(paragraph, url, text):
-       part = paragraph.part
-       r_id = part.relate_to(
-           url,
-           "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
-           is_external=True,
-       )
-       hyperlink = OxmlElement("w:hyperlink")
-       hyperlink.set(qn("r:id"), r_id)
-       run = OxmlElement("w:r")
-       run.append(OxmlElement("w:rPr"))
-       t = OxmlElement("w:t")
-       t.text = text
-       run.append(t)
-       hyperlink.append(run)
-       paragraph._p.append(hyperlink)
-
-   p = doc.add_paragraph(style="CVMeta")
-   add_hyperlink(p, "https://linkedin.com/in/...", "linkedin.com/in/...")
-   ```
-3. Si `python-docx` no está: un `.docx` es un zip. Insertá cada párrafo en `word/document.xml`, justo antes de `<w:sectPr>`, con el estilo por ID y el texto escapado para XML (`&`, `<`, `>`):
+2. Un `.docx` es un zip. Insertá cada párrafo en `word/document.xml`, justo antes de `<w:sectPr>`, con el estilo por ID y el texto escapado para XML (`&`, `<`, `>`):
    ```xml
    <w:p><w:pPr><w:pStyle w:val="CVVineta"/></w:pPr><w:r><w:t xml:space="preserve">Texto</w:t></w:r></w:p>
    ```
    `zipfile` de la librería estándar de Python alcanza para leer y reescribir el zip.
 
-   Para que un link salga clickeable con este método (también es el comportamiento por defecto, no solo con `python-docx`): la plantilla ya trae dos relaciones (`rId1` para `styles.xml`, `rId2` para `numbering.xml`), así que cada link usa un `rId` propio a partir de `rId3` (el siguiente libre por cada link que agregues en ese documento).
+   Para que un link salga clickeable (comportamiento por defecto, no opcional): la plantilla ya trae dos relaciones (`rId1` para `styles.xml`, `rId2` para `numbering.xml`), así que cada link usa un `rId` propio a partir de `rId3` (el siguiente libre por cada link que agregues en ese documento).
    1. En `word/_rels/document.xml.rels`, agregá una relación por link, justo antes de `</Relationships>`:
       ```xml
       <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" Target="https://linkedin.com/in/persona-demo" TargetMode="External"/>
@@ -127,6 +98,9 @@ Omití las secciones sin contenido; no dejes títulos vacíos.
       ```xml
       <w:p><w:pPr><w:pStyle w:val="CVContacto"/></w:pPr><w:r><w:t xml:space="preserve">Buenos Aires, Argentina | persona@example.com | </w:t></w:r><w:hyperlink xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="rId3"><w:r><w:t xml:space="preserve">linkedin.com/in/persona-demo</w:t></w:r></w:hyperlink></w:p>
       ```
-4. **Idioma del documento (obligatorio):** con el DOCX ya guardado, volvé a abrirlo como zip y reemplazá, dentro de `word/styles.xml`, el valor de `w:lang` (`w:val`, `w:eastAsia` y `w:bidi`, los tres) por el código que corresponda al idioma de salida (tabla en `locales.md`, sección "Idioma del documento"). Es un simple reemplazo de texto sobre el XML; no hace falta tocar nada más.
-5. PDF: convertí con LibreOffice en modo headless (`soffice --headless --convert-to pdf --outdir <carpeta> <archivo.docx>`) si está disponible. Si no, decíselo a la persona: el DOCX ya sirve y el PDF se puede exportar desde Word.
-6. Contá las páginas del PDF y contrastalas con la longitud pedida. Si sobra, acortá contenido; no achiques la tipografía.
+3. **Idioma del documento (obligatorio):** con el DOCX ya guardado, volvé a abrirlo como zip y reemplazá, dentro de `word/styles.xml`, el valor de `w:lang` (`w:val`, `w:eastAsia` y `w:bidi`, los tres) por el código que corresponda al idioma de salida (tabla en `locales.md`, sección "Idioma del documento"). Es un simple reemplazo de texto sobre el XML; no hace falta tocar nada más.
+
+### PDF (con cualquiera de los dos métodos)
+
+1. Convertí con LibreOffice en modo headless (`soffice --headless --convert-to pdf --outdir <carpeta> <archivo.docx>`) si está disponible. Si no, decíselo a la persona: el DOCX ya sirve y el PDF se puede exportar desde Word.
+2. Contá las páginas del PDF y contrastalas con la longitud pedida. Si sobra, acortá contenido; no achiques la tipografía.

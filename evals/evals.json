@@ -316,7 +316,7 @@
         "(responder las preguntas de huecos con datos inventados y mínimos)",
         "Sí, está todo bien, guardalo."
       ],
-      "expected_output": "Extrae solo lo escrito: no inventa métricas ni meses; el 'más de 40 clientes' queda tal cual; falta el período exacto y datos como teléfono y links, que van a Pendientes o se preguntan. Muestra un resumen antes de guardar y no escribe nada hasta el sí. Crea CV/perfil.md, CV/config.md, CV/cvs/ y CV/postulaciones/, sin rutas absolutas.",
+      "expected_output": "Extrae solo lo escrito: no inventa métricas ni meses; el 'más de 40 clientes' queda tal cual; falta el período exacto y datos como teléfono y links, que van a Pendientes o se preguntan. Muestra un resumen antes de guardar y no escribe nada hasta el sí. Crea CV/perfil.md, CV/config.md y CV/postulaciones/, sin rutas absolutas.",
       "criterios": [
         "C1",
         "C8",
