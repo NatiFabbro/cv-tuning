@@ -78,7 +78,7 @@ for (const f of [
   'reference/workspace-layout.md', 'reference/profile-schema.md', 'reference/honesty-rules.md',
   'reference/ats-guidelines.md', 'reference/postulaciones-format.md', 'reference/locales.md',
   'reference/template-styles.md', 'reference/cv-structure.md', 'reference/external-links.md',
-  'assets/templates/ats-clean.docx', 'assets/templates/visual.docx',
+  'reference/voz-y-persona.md', 'assets/templates/ats-clean.docx', 'assets/templates/visual.docx',
 ]) if (!existsSync(join(root, 'plugins/cv', f))) fail(`Falta plugins/cv/${f}`);
 
 // 6. Nada de datos personales evidentes en el repo: emails fuera de example.com

@@ -349,7 +349,7 @@
         "/cv:update-profile Aprendí TypeScript haciendo una app de tareas: la subí a GitHub como mateo-prueba-demo/tareas-ts.",
         "Sí, guardalo."
       ],
-      "expected_output": "Muestra las diferencias (se agrega P2 con su logro; se modifica Pendientes al sacar 'No usó TypeScript'; skills suma TypeScript) antes de guardar. Usa el ID siguiente libre (P2) sin renumerar nada. Guarda una copia como CV/perfil.anterior.md. No agrega logros ni números que la persona no dijo.",
+      "expected_output": "Muestra las diferencias (se agrega P2 con su logro; se modifica Pendientes al sacar 'No usó TypeScript'; skills suma TypeScript) antes de guardar. Usa el ID siguiente libre (P2) sin renumerar nada. Archiva la versión anterior con fecha en CV/historial-perfiles/, sin preguntar; CV/perfil.md queda como la versión vigente. No agrega logros ni números que la persona no dijo.",
       "criterios": [
         "C1",
         "C8"

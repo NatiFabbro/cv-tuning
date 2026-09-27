@@ -4,6 +4,20 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). E
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-09-27
+
+Fixes de la segunda ronda de pruebas manuales en Cowork sobre la 1.1.0.
+
+### Fixed
+- `/cv:setup` ya no descarta una fuente si otra ya le alcanzó para armar el perfil: si la persona da un CV y también un link de LinkedIn (u otra combinación), procesa las dos y las combina, y si una está bloqueada pide igual el export para no dejarla afuera sin avisar.
+- La regla de "nunca tercera persona" (antes solo en `cv-structure.md`, para `tune`) se extrajo a un contrato compartido (`reference/voz-y-persona.md`) y ahora también la sigue `/cv:setup` al guardar el Resumen base del perfil: antes podía quedar copiado tal cual en tercera persona desde un CV o LinkedIn existente.
+- La regla de no mostrar un login ahora cubre también el caso de leer un link con una herramienta de navegador visible (no solo lectura de texto en segundo plano): LinkedIn puede mostrar el cartel de inicio de sesión de forma transitoria mientras carga, aunque el contenido termine siendo legible. Ya no se reintenta con el navegador un link que la lectura en segundo plano marcó como bloqueado, se avisa antes de abrir un navegador si puede pasar esto, y si el cartel llegó a aparecer se informa en el resumen en vez de reportar una lectura limpia.
+- El perfil ya no pregunta si reemplazar una única copia `perfil.anterior.md`: `CV/perfil.md` es siempre la versión vigente, y cada versión que se reemplaza (en `/cv:setup` al rehacerlo, o en `/cv:update-profile` al guardar) se archiva sola, con fecha, en `CV/historial-perfiles/`. Nunca hace falta confirmar el archivado, solo el contenido nuevo.
+- Nueva regla compartida ("Verificación de guardado" en `workspace-layout.md`): ningún skill reporta un archivo como guardado sin releerlo de cero primero y citar un detalle concreto del cambio. Antes `update-profile` podía decir "guardado" con el archivo real todavía con el contenido viejo (visto en pruebas: una certificación que la persona veía vacía en su compu, aunque el skill había confirmado el guardado).
+
+### Notes
+- En prueba activa en Cowork.
+
 ## [1.1.0] - 2026-09-27
 
 Fixes de la primera ronda de pruebas manuales en Cowork.

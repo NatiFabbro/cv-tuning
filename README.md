@@ -2,7 +2,7 @@
 
 Un plugin de Claude para armar tu perfil profesional una sola vez y **afinar tu CV para cada oferta de trabajo**, sin inventar nada que no esté en tu perfil.
 
-> **Estado: v1.1.0, en prueba activa en Cowork.** Los pasos de instalación siguen la [documentación oficial de Cowork](https://claude.com/docs/cowork/guide/plugins); si tu versión de la interfaz muestra otros nombres, avisame para corregirlo.
+> **Estado: v1.1.1, en prueba activa en Cowork.** Los pasos de instalación siguen la [documentación oficial de Cowork](https://claude.com/docs/cowork/guide/plugins); si tu versión de la interfaz muestra otros nombres, avisame para corregirlo.
 
 Este README tiene dos partes: una para quienes solo quieren **usar** el plugin (no hace falta saber nada técnico), y otra para quienes quieren **hacer un fork** y construir sus propias skills sobre esta misma base.
 

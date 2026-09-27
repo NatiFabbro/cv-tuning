@@ -19,6 +19,7 @@ Los contratos compartidos están en `${CLAUDE_PLUGIN_ROOT}/reference/`. Si esa v
 - `profile-schema.md`: cómo está escrito el perfil (secciones y IDs).
 - `external-links.md`: cómo (y cuándo no) leer el link de una oferta.
 - `cv-structure.md`: qué secciones lleva el CV, en qué orden, qué va en cada una y cómo se redacta. Es la guía de contenido del paso 6.
+- `voz-y-persona.md`: cómo redactar el resumen y las viñetas (nunca en tercera persona).
 - `locales.md`, `ats-guidelines.md`, `template-styles.md`: idioma, formato y cómo rellenar la plantilla.
 - `postulaciones-format.md`: cómo se registra cada ejecución.
 
@@ -103,6 +104,8 @@ Con el OK:
 
 ## 7. Verificación (antes de entregar)
 
+Antes de revisar el contenido, verificá el guardado en sí según `workspace-layout.md` ("Verificación de guardado"): abrí de nuevo el DOCX que acabás de guardar (una lectura fresca del archivo en disco, no lo que tenías compuesto en memoria) y confirmá que el contenido está ahí. Si no podés confirmarlo, no sigas: decíselo a la persona y reintentá el guardado antes de dar nada por entregado.
+
 Recorré **cada línea** del CV generado y contrastala con el perfil, usando el checklist único de `cv-structure.md` ("Checklist antes de entregar"): repasalo entero, no lo repitas de memoria ni salgas de él.
 
 Si algo no pasa, corregí el CV (sacalo o reescribilo) y volvé a verificar. Guardá el resultado (qué IDs respaldan qué) para el registro. Si no pudiste verificar algo, no lo entregues como si estuviera verificado: decilo.
@@ -111,11 +114,11 @@ Si algo no pasa, corregí el CV (sacalo o reescribilo) y volvé a verificar. Gua
 
 1. **PDF:** convertí el DOCX a PDF en la misma carpeta con lo que esté disponible (por ejemplo LibreOffice en modo headless, ver `template-styles.md`). Contá las páginas y comparalas con la longitud pedida; si sobran, acortá contenido y regenerá. Si no hay forma de convertir sin instalar nada, decilo: el DOCX ya sirve y el PDF se puede exportar desde Word.
 2. **Changelog:** mostrale a la persona, en lenguaje simple: qué se destacó, qué se dejó afuera, qué palabras clave se incluyeron y cuáles no (por falta de respaldo), y los gaps que quedaron.
-3. Indicá dónde quedaron los archivos, con rutas relativas.
+3. Indicá dónde quedaron los archivos, con rutas relativas, solo después de haber confirmado que existen (paso 7).
 
 ## 9. Registrar la ejecución
 
-Escribí `CV/postulaciones/<AAAA-MM-DD_empresa_puesto>.md` siguiendo `postulaciones-format.md` (con ruta relativa al PDF, la lista de destacados, gaps, changelog y resultado de la verificación). Si ya existe, no lo pises: agregá `_2`.
+Escribí `CV/postulaciones/<AAAA-MM-DD_empresa_puesto>.md` siguiendo `postulaciones-format.md` (con ruta relativa al PDF, la lista de destacados, gaps, changelog y resultado de la verificación). Si ya existe, no lo pises: agregá `_2`. Verificá el guardado según `workspace-layout.md` ("Verificación de guardado") antes de decirle a la persona que quedó registrado.
 
 Cerrá ofreciendo: guardar en el perfil cualquier dato nuevo que la persona haya aportado (`/cv:update-profile`), y adaptar el CV a otra oferta.
 

@@ -63,10 +63,10 @@ Preguntá: "¿Lo guardo así?". **No escribas nada hasta recibir un sí claro.**
 
 ## 5. Guardar
 
-1. Antes de modificar, guardá una copia del perfil vigente como `CV/perfil.anterior.md` (si ya existe una copia, preguntá antes de reemplazarla).
+1. Antes de modificar, archivá el perfil vigente en `CV/historial-perfiles/` con la convención de `workspace-layout.md` (nunca hace falta preguntar por esto: cada versión queda en su propio archivo con fecha, no se pisa nada).
 2. Escribí `CV/perfil.md` con los cambios, respetando el esquema.
-3. Releé el archivo y verificá que refleja exactamente lo confirmado.
+3. Verificá el guardado según `workspace-layout.md` ("Verificación de guardado"): releé el archivo de cero y confirmá que refleja exactamente lo confirmado. Si no podés confirmarlo así, no digas que se guardó: decíselo a la persona y reintentá.
 
 ## 6. Cierre
 
-Resumí en una o dos frases qué quedó guardado y ofrecé el siguiente paso: adaptar un CV a una oferta (`/cv:tune`). Si quedan pendientes, mencioná cuántos.
+Resumí en una o dos frases qué quedó guardado, **citando un detalle concreto** de lo que confirmaste al releer (por ejemplo, el texto exacto de la certificación o el logro agregado), no una frase genérica como "listo, guardado". Ofrecé el siguiente paso: adaptar un CV a una oferta (`/cv:tune`). Si quedan pendientes, mencioná cuántos.

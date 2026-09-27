@@ -28,7 +28,7 @@ version-esquema: 1
 - **Autorización de trabajo / disponibilidad:** (opcional)
 
 ## Resumen base
-Dos o tres líneas solo con hechos del perfil. (opcional)
+Dos o tres líneas solo con hechos del perfil, redactadas según `voz-y-persona.md` (nunca en tercera persona). (opcional)
 
 ## Experiencia
 ### E1 · Rol — Empresa

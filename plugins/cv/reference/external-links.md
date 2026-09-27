@@ -12,6 +12,14 @@ Ningún skill de este plugin intenta iniciar sesión en un sitio de terceros, ni
 
 LinkedIn en particular bloquea la gran mayoría de sus páginas (perfiles, publicaciones, ofertas) para quien no tiene una sesión iniciada, así que lo más frecuente va a ser el camino de "pedir que pegue el texto o adjunte algo"; algunas publicaciones y ofertas sí quedan accesibles sin sesión, y ahí alcanza con leerlas directamente.
 
+## Si la lectura usa un navegador visible
+
+Esta regla vale todavía más si para leer un link tenés que usar una herramienta de navegador (una que abre y renderiza la página de verdad, a diferencia de traer solo el texto en segundo plano): ahí lo que la página muestre en cada momento puede quedar visible para la persona, aunque vos nunca se lo pidas ni lo uses. LinkedIn en particular suele mostrar un cartel de "iniciá sesión" o "creá una cuenta" de forma transitoria mientras carga una página, incluso en publicaciones u ofertas que terminan siendo públicas y legibles igual.
+
+- **Si un intento de lectura en segundo plano (sin navegador visible) ya te dijo que el link está bloqueado**, no reintentes el mismo link con un navegador visible: es muy probable que ahí sí se muestre el cartel de login, que es justo lo que esta regla evita. Seguí directamente con "pedile que pegue el texto".
+- **Si vas a usar un navegador visible** para un link (porque es la única forma de leerlo, o porque no es de LinkedIn y no hay motivo para sospechar un muro), avisale a la persona **antes** de navegar: "voy a abrir el link en un navegador para intentar leerlo; si aparece un cartel para iniciar sesión, es normal en algunos sitios — no hace falta que hagas nada, no inicies sesión ahí." Así, si aparece, no es una sorpresa.
+- **Si un cartel de inicio de sesión llegó a aparecer** en algún momento de la navegación, aunque al final hayas podido leer el contenido igual, decíselo tal cual en el resumen: "para leer esto tuve que abrir un navegador y en el camino apareció brevemente el cartel de inicio de sesión de LinkedIn; no inicié sesión, y pude leer el contenido igual." No reportes el resultado como una lectura limpia si la persona vio ese cartel: fue parte de lo que pasó y merece que se lo cuentes.
+
 ## Por qué
 
 Iniciar sesión en nombre de la persona (aunque fuera posible) significaría manejar sus credenciales, algo que está fuera de lo que este plugin hace. Mostrarle una pantalla de login de un sitio externo como si fuera parte de la conversación también confunde: puede parecer que el asistente le está pidiendo que inicie sesión, cuando ese paso no sirve para nada acá — lo que sirve es el texto, y lo puede pegar directamente.

@@ -13,22 +13,7 @@ Contrato de contenido para `tune` (paso "Generar el CV"). Dice **qué secciones 
 
 ## Voz y persona gramatical
 
-Aplica a toda descripción de una acción o logro en el CV: el resumen profesional (sección 2), las viñetas de experiencia (sección 3) y las de proyectos (sección 5).
-
-**Nunca en tercera persona** ("Desarrolló", "Participó", "Lideró", y tampoco su versión en presente: "Desarrolla", "Participa", "Realiza"). Un CV no habla de la persona como si fuera otra, y mezclar pasado y presente en tercera persona es un error frecuente para evitar de forma activa.
-
-**Por defecto, en CVs en español**, usá construcciones nominalizadas (un sustantivo derivado del verbo, sin conjugar nada):
-
-- "Desarrollo de dashboards de ventas."
-- "Coordinación de un equipo de 12 personas en turnos rotativos."
-- "Reducción de los reclamos sin resolver, de 40 a 10."
-- "Participación en la migración del data warehouse a Redshift."
-
-Esta forma no tiene tiempo verbal, así que sirve igual para un rol pasado o el actual: evita otro error frecuente, que es tener que decidir pasado o presente viñeta por viñeta.
-
-**Si la persona pide primera persona** (lo dice en el checkpoint, en la entrevista de `setup`, o en cualquier momento), usá primera persona conjugada, en pasado para roles anteriores y presente para el rol actual: "Desarrollé dashboards de ventas.", "Coordino un equipo de 12 personas." Guardá esa preferencia en **Preferencias → Tono** del perfil (`/cv:update-profile`) para no volver a preguntar. Si una nominalización te queda forzada, reformulá la frase; no vuelvas a la tercera persona como atajo.
-
-**En CVs en otro idioma** (inglés u otro), seguí la convención estándar de ese idioma en vez de esta regla. En inglés, por ejemplo, la convención es el verbo en pasado sin sujeto ("Developed dashboards…"), presente para el rol actual: no es tercera persona (el inglés no conjuga por persona en pasado) y ya es la forma correcta, no hay que cambiarla.
+Ver `voz-y-persona.md` (contrato compartido con `setup`, porque la misma regla ya tenía que aplicarse también al Resumen base del perfil). Se aplica igual acá, al resumen profesional (sección 2), a las viñetas de experiencia (sección 3) y a las de proyectos (sección 5).
 
 ## Orden de las secciones
 
