@@ -29,6 +29,7 @@ El cambio puede venir como argumento (`$ARGUMENTS`), en el chat o en un archivo 
 - **Nueva experiencia**, o **fin** de una actual (cargar fecha de cierre).
 - **Nuevo logro** en una experiencia existente, o **una métrica** que faltaba en uno.
 - **Skills, idiomas, estudios, certificaciones o proyectos** nuevos.
+- **Referencia** nueva en una experiencia existente, o cambio en si esa persona autorizó ser mencionada. Si es nueva, preguntá siempre **"¿esta persona sabe que la vas a poner como referencia y está de acuerdo?"** y guardá la respuesta tal cual (sí / no / no lo consulté todavía); nunca asumas un sí.
 - **Preferencias** (tono, longitud, roles objetivo, país) y **No mostrar**.
 - **Corrección** de un dato erróneo.
 - **Un dato surgido en un `/cv:tune`** (por ejemplo, experiencia que el perfil no tenía). Si vino de una conversación anterior, pedile que lo confirme de nuevo con sus palabras.
@@ -37,7 +38,7 @@ Preguntá lo que falte para escribir cada dato completo (rol, empresa, cuándo, 
 
 ## 3. Aplicar en el esquema
 
-- Usá los IDs siguientes libres (`E4`, `E2.L5`, `ED2`…). **Nunca renumeres ni reutilices** IDs existentes: los registros de `postulaciones/` los citan.
+- Usá los IDs siguientes libres (`E4`, `E2.L5`, `E2.R2`, `ED2`…). **Nunca renumeres ni reutilices** IDs existentes: los registros de `postulaciones/` los citan.
 - Mantené el orden cronológico inverso en Experiencia y Educación.
 - Si el dato nuevo contradice algo del perfil (fechas, cargos, números), no elijas vos: mostrá las dos versiones y preguntá cuál es la correcta.
 - Si el dato resuelve algo de **Pendientes**, sacalo de ahí.

@@ -46,9 +46,12 @@ CVSeccion   Proyectos                   (si aplican)
 CVSeccion   Certificaciones             (si aplican)
   CVVineta  Nombre — Emisor, año
 CVSeccion   Habilidades
-  CVTexto   Grupo: skill, skill, skill  (un párrafo por grupo)
+  CVVineta  Grupo: skill, skill, skill  (una viñeta por grupo)
 CVSeccion   Idiomas
   CVTexto   Español: nativo · Inglés: B2
+CVSeccion   Referencias                  (solo si la persona lo autorizó para este CV)
+  CVTexto   Referencias disponibles a solicitud     (formato "línea genérica")
+  CVVineta  Nombre — Rol/relación — Contacto        (formato "detalle completo", una por referencia)
 ```
 
 Omití las secciones sin contenido; no dejes títulos vacíos.
@@ -57,7 +60,7 @@ Omití las secciones sin contenido; no dejes títulos vacíos.
 
 - Sin formato directo: no cambies fuente, tamaño, color ni negrita a mano. Si algo no se ve bien, se corrige en el contenido (más corto) o en la plantilla, no en el CV.
 - Sin tablas, imágenes, encabezados ni pies (ver `ats-guidelines.md`).
-- Los links (contacto, proyectos) se muestran siempre como el texto de la URL (`linkedin.com/in/...`), nunca con un texto genérico tipo "ver perfil". Si generás con `python-docx`, hacelos además clickeables (ver la función auxiliar más abajo); si usás el respaldo por XML, dejalos como texto plano, que igual se lee perfecto.
+- Los links (contacto, proyectos) se muestran siempre como el texto de la URL (`linkedin.com/in/...`), nunca con un texto genérico tipo "ver perfil", y **siempre como hipervínculo real** (clickeable), con los dos métodos de más abajo. Un hipervínculo real no perjudica al ATS: es un contenedor alrededor de un run de texto normal, y el texto visible se extrae exactamente igual que cualquier otro texto del documento (así leen un `.docx` python-docx, docx2txt, Apache Tika y en general cualquier motor de ATS). Solo si ninguno de los dos métodos funciona, dejalo como texto plano y decíselo a la persona.
 - El cuerpo de la plantilla viene vacío: agregá los párrafos en orden, sin dejar párrafos vacíos.
 - Tamaño de página: A4 por defecto. Para EE. UU. y Canadá usá Carta (Letter): ancho 8.5", alto 11".
 - **Idioma del documento:** las plantillas traen `es-ES` fijado como idioma interno. Es un paso obligatorio, no opcional (ver más abajo, "Idioma del documento"): si el CV no sale en español, hay que corregirlo, o el corrector de Word subraya como error todo el texto.
@@ -83,7 +86,7 @@ Omití las secciones sin contenido; no dejes títulos vacíos.
    doc.add_paragraph("Logro con su métrica.", style="CVVineta")
    doc.save("CV_Nombre-Apellido_Empresa.docx")
    ```
-   Para que un link salga clickeable (opcional; si no, dejalo como texto plano y listo), usá una función auxiliar, porque `python-docx` no trae una directa:
+   Para que un link salga clickeable (es el comportamiento por defecto, no opcional), usá una función auxiliar, porque `python-docx` no trae una directa:
    ```python
    from docx.oxml.ns import qn
    from docx.oxml import OxmlElement
@@ -112,7 +115,18 @@ Omití las secciones sin contenido; no dejes títulos vacíos.
    ```xml
    <w:p><w:pPr><w:pStyle w:val="CVVineta"/></w:pPr><w:r><w:t xml:space="preserve">Texto</w:t></w:r></w:p>
    ```
-   `zipfile` de la librería estándar de Python alcanza para leer y reescribir el zip. Los links van como texto plano con este método (armar la relación de hipervínculo a mano no vale la pena acá).
+   `zipfile` de la librería estándar de Python alcanza para leer y reescribir el zip.
+
+   Para que un link salga clickeable con este método (también es el comportamiento por defecto, no solo con `python-docx`): la plantilla ya trae dos relaciones (`rId1` para `styles.xml`, `rId2` para `numbering.xml`), así que cada link usa un `rId` propio a partir de `rId3` (el siguiente libre por cada link que agregues en ese documento).
+   1. En `word/_rels/document.xml.rels`, agregá una relación por link, justo antes de `</Relationships>`:
+      ```xml
+      <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" Target="https://linkedin.com/in/persona-demo" TargetMode="External"/>
+      ```
+      `Target` lleva la URL completa, con `https://`, aunque el texto visible sea solo el dominio.
+   2. En `word/document.xml`, envolvé el run del link en un `<w:hyperlink>` con ese mismo `r:id` (el `xmlns:r` se declara ahí mismo, no hace falta tocar la etiqueta raíz `<w:document>`):
+      ```xml
+      <w:p><w:pPr><w:pStyle w:val="CVContacto"/></w:pPr><w:r><w:t xml:space="preserve">Buenos Aires, Argentina | persona@example.com | </w:t></w:r><w:hyperlink xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="rId3"><w:r><w:t xml:space="preserve">linkedin.com/in/persona-demo</w:t></w:r></w:hyperlink></w:p>
+      ```
 4. **Idioma del documento (obligatorio):** con el DOCX ya guardado, volvé a abrirlo como zip y reemplazá, dentro de `word/styles.xml`, el valor de `w:lang` (`w:val`, `w:eastAsia` y `w:bidi`, los tres) por el código que corresponda al idioma de salida (tabla en `locales.md`, sección "Idioma del documento"). Es un simple reemplazo de texto sobre el XML; no hace falta tocar nada más.
 5. PDF: convertí con LibreOffice en modo headless (`soffice --headless --convert-to pdf --outdir <carpeta> <archivo.docx>`) si está disponible. Si no, decíselo a la persona: el DOCX ya sirve y el PDF se puede exportar desde Word.
 6. Contá las páginas del PDF y contrastalas con la longitud pedida. Si sobra, acortá contenido; no achiques la tipografía.

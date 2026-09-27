@@ -32,6 +32,7 @@ estado: generado
 
 ## Changelog del CV
 - Orden de secciones: habitual (o "cambiado a pedido: Educación y Proyectos antes de Experiencia")
+- Referencias: no incluidas (o "incluidas, formato línea genérica" / "incluidas, detalle completo: E1.R1, E2.R1")
 - Resumen reescrito en base a: E2, E3
 - Keywords incluidas (con respaldo): X, Y
 - Keywords no incluidas (sin respaldo): Z

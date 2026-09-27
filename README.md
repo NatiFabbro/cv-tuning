@@ -2,7 +2,7 @@
 
 Un plugin de Claude para armar tu perfil profesional una sola vez y **afinar tu CV para cada oferta de trabajo**, sin inventar nada que no esté en tu perfil.
 
-> **Estado: v1.0.0, todavía sin probar en Cowork ni con personas usuarias.** Los pasos de instalación de abajo son provisorios y se van a reemplazar por los pasos reales cuando se verifiquen.
+> **Estado: v1.1.0, en prueba activa en Cowork.** Los pasos de instalación siguen la [documentación oficial de Cowork](https://claude.com/docs/cowork/guide/plugins); si tu versión de la interfaz muestra otros nombres, avisame para corregirlo.
 
 Este README tiene dos partes: una para quienes solo quieren **usar** el plugin (no hace falta saber nada técnico), y otra para quienes quieren **hacer un fork** y construir sus propias skills sobre esta misma base.
 
@@ -14,7 +14,7 @@ No hace falta saber programar ni entender de "plugins" para usar esto. Seguí es
 
 ### Cómo se usa (3 pasos)
 
-1. **Instalá el plugin** en Cowork. *(Provisorio: agregá un marketplace de plugins con la dirección `NatiFabbro/cv-tuning` e instalá `cv`. Ver [Instalar y actualizar](#instalar-y-actualizar).)*
+1. **Instalá el plugin** en Cowork: `Customize` → `Plugins` → `Add marketplace` con `NatiFabbro/cv-tuning` → buscá `cv` en `Discover` e instalalo. (Ver [Instalar y actualizar](#instalar-y-actualizar) para el detalle paso a paso.)
 2. **Armá tu perfil, una sola vez.** Conectá una carpeta de trabajo y escribí `/cv:setup`. Podés pasarle tu CV actual (PDF, Word o texto) o contarle tu experiencia si no tenés uno. Te muestra un resumen y no guarda nada hasta que digas que sí.
 3. **Adaptá tu CV a cada oferta.** Escribí `/cv:tune` y pegá el texto de la oferta, el link o una captura. Antes de generar nada, te muestra qué va a destacar y qué te falta para el puesto. Cuando confirmás, te entrega el CV en **Word (DOCX) y PDF**.
 
@@ -22,10 +22,16 @@ También podés pedirlo con tus palabras ("armame un CV para esta oferta"); no h
 
 ### Instalar y actualizar
 
-*(Provisorio: se reemplaza cuando se verifique el flujo real en Cowork.)*
+**Instalar:**
 
-- **Instalar:** en Cowork, agregá el marketplace `NatiFabbro/cv-tuning` (o la URL de este repositorio) desde la sección de plugins, e instalá el plugin `cv`.
-- **Actualizar:** volvé a la sección de plugins, actualizá el marketplace `cv-tuning` y luego el plugin. Tu perfil y tus CVs no se tocan porque viven en tu carpeta, no en el plugin.
+1. En Cowork, abrí **Customize** en la barra lateral y elegí **Plugins**.
+2. Elegí **Add marketplace** y pegá `NatiFabbro/cv-tuning` (o la URL completa `https://github.com/NatiFabbro/cv-tuning`).
+3. Elegí **Discover** para ver los plugins disponibles, buscá **cv** y tocá **Install**. Te va a mostrar los permisos que pide antes de confirmar.
+4. Este plugin no usa conectores (no se conecta a ningún servicio externo ni te pide iniciar sesión en nada); con instalarlo ya podés usar `/cv:setup` y `/cv:tune`.
+
+**Actualizar:** en **Customize → Plugins**, buscá el marketplace `cv-tuning` y tocá **Check for updates** (o activá **Sync automatically** para que se actualice solo). Tu perfil y tus CVs no se tocan: viven en tu carpeta de trabajo, no en el plugin.
+
+**Desinstalar:** abrí el plugin `cv` en **Customize → Plugins** y tocá **Remove**.
 
 Superficie soportada: **Cowork primero**. Claude Code y otras IAs quedan para más adelante.
 

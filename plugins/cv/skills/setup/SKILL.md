@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Prepara tu carpeta de trabajo de CV y arma tu perfil profesional (la base de todos tus CVs). Usalo la primera vez, o cuando pidan "armar mi perfil", "configurar mi CV", "empezar con mi CV", "cargar mi CV", "crear mi carpeta de CV" o "no tengo CV y quiero hacer uno". Funciona con un CV existente (PDF, Word o texto pegado) o desde cero, con una entrevista.
+description: Prepara tu carpeta de trabajo de CV y arma tu perfil profesional (la base de todos tus CVs). Usalo la primera vez, o cuando pidan "armar mi perfil", "configurar mi CV", "empezar con mi CV", "cargar mi CV", "crear mi carpeta de CV" o "no tengo CV y quiero hacer uno". Funciona con un CV existente (PDF, Word o texto pegado), un link o export de LinkedIn, o desde cero con una entrevista.
 ---
 
 # Setup: armar la carpeta de trabajo y el perfil
@@ -16,6 +16,7 @@ Los contratos compartidos están en `${CLAUDE_PLUGIN_ROOT}/reference/`. Si esa v
 1. `workspace-layout.md`: dónde va cada cosa y las reglas de rutas.
 2. `profile-schema.md`: cómo se escribe el perfil (secciones, IDs, reglas).
 3. `honesty-rules.md`: reglas sobre cómo tratar los datos, por ejemplo: no inventar nada.
+4. `external-links.md`: cómo (y cuándo no) leer un link de LinkedIn u otro sitio.
 
 ## 1. Carpeta de trabajo
 
@@ -29,9 +30,9 @@ Buscá `CV/` y dentro `perfil.md` y `config.md`.
 - si **Existe `CV/perfil.md`:** si su `version-esquema` es mayor a la que conocés (`1`), avisale a la persona que tu versión del plugin es más vieja que su perfil y frená ahí (no lo toques). Si no, contale, en una línea, qué tiene (nombre y cantidad de experiencias). Preguntale qué prefiere: (a) dejarlo como está y salir, (b) agregarle cosas (derivá a `/cv:update-profile`), o (c) rehacerlo desde cero. Solo con un sí claro a (c) seguí, y antes de escribir guardá el anterior como `CV/perfil.anterior.md` (si ya existe ese archivo, preguntá antes de reemplazarlo).
 - si **Existe `CV/` pero le falta `config.md` o alguna subcarpeta:** completá lo que falta, sin tocar lo demás, y avisale. Si `config.md` ya existe y su `version-layout` es mayor a la que conocés (`1`), no es motivo para frenar: avisá que hay un ajuste que no reconocés y usá los valores por defecto de `workspace-layout.md`.
 
-## 3. Ingesta: ¿tiene un CV?
+## 3. Ingesta: ¿tiene un CV o LinkedIn?
 
-Preguntá: "¿Tenés un CV actual que podamos usar de base? Puede ser un PDF, un Word o texto que pegues acá. Si no tenés, no hay problema: lo armamos conversando."
+Preguntá: "¿Tenés un CV actual, o preferís arrancar desde tu LinkedIn? Podés pasarme un PDF, un Word, texto pegado, el link a tu perfil de LinkedIn, o un archivo exportado de ahí. Si no tenés nada de eso, no hay problema: lo armamos conversando."
 
 ### 3a. Tiene CV (archivo adjunto o texto pegado)
 
@@ -40,7 +41,17 @@ Preguntá: "¿Tenés un CV actual que podamos usar de base? Puede ser un PDF, un
 3. **Extraé solo lo que está escrito.** No completes fechas, cargos ni números que falten; lo dudoso o faltante va a **Pendientes**. Respetá los números tal cual aparecen.
 4. Si el CV no tiene fechas o el orden es confuso, preguntá antes de suponer.
 
-### 3b. No tiene CV
+### 3b. Pasó un link a su perfil de LinkedIn
+
+1. Intentá abrir el link (regla de `external-links.md`: si aparece una pantalla para iniciar sesión o cualquier muro parecido, es contenido no legible; **nunca la muestres ni le pidas a la persona que inicie sesión**).
+2. **Si se puede leer** (sin ningún muro de por medio): extraé los datos igual que en 3a (puntos 2 a 4): solo lo que está escrito, con los mismos IDs.
+3. **Si está bloqueado:** es lo más frecuente, LinkedIn no deja ver casi ningún perfil sin sesión iniciada. Decíselo con calma y pedile una de estas dos cosas, lo que le resulte más fácil:
+   - Un PDF de su perfil: en LinkedIn, desde su perfil, "Más" (o los tres puntos) → "Guardar en PDF" (el nombre exacto puede variar según el idioma de su cuenta).
+   - El archivo completo que exporta LinkedIn: "Configuración y privacidad" → "Privacidad de los datos" → "Obtener una copia de tus datos".
+   Cuando te lo pase, procesalo igual que un CV pegado (3a).
+4. Guardá el link de LinkedIn en **Datos personales → Links**, se haya podido leer el contenido o no.
+
+### 3c. No tiene ni CV ni LinkedIn
 
 Armá el perfil por entrevista, una sección por vez, en este orden: datos de contacto, experiencia laboral (empezá por el trabajo más reciente), estudios, skills, idiomas, y proyectos o certificaciones si los hay. Para cada experiencia preguntá: qué puesto tenía, dónde, cuándo (mes y año aproximados están bien), qué hacía y qué logró. Si la persona no tiene experiencia laboral formal, seguí con estudios, proyectos, voluntariados y trabajos informales: también cuentan y son hechos reales.
 
@@ -48,7 +59,7 @@ Si dice "no sé qué poner", sugerí preguntas concretas ("¿qué era lo que má
 
 ## 4. Entrevista de huecos
 
-Cuando tengas la base (de 3a o 3b), revisá qué falta y preguntá **solo eso**, sin repetir lo ya cubierto:
+Cuando tengas la base (de 3a, 3b o 3c), revisá qué falta y preguntá **solo eso**, sin repetir lo ya cubierto:
 
 - **Logros sin métrica:** por cada logro importante sin número, preguntá "¿recordás algún número, aunque sea aproximado (personas, tiempo, dinero, porcentajes)? Si no, lo dejamos sin número." No sugieras cifras: empuja a inventar (`honesty-rules.md`, regla 5).
 - **Roles objetivo:** a qué tipo de puestos quiere postularse.
@@ -57,12 +68,13 @@ Cuando tengas la base (de 3a o 3b), revisá qué falta y preguntá **solo eso**,
 - **Tono:** sobrio, cercano, técnico.
 - **Longitud:** 1 página, 2 páginas o lo que haga falta.
 - **Qué omitir:** empleos, fechas, datos o links que no quiere que aparezcan nunca.
+- **Referencias:** preguntá una sola vez, en general, si para alguno de sus trabajos anteriores quiere guardar el contacto de alguien que pueda dar una referencia (un ex jefe, colega o cliente). Es opcional. Si dice que sí, por cada una pedile: nombre, de qué trabajo, cómo contactarla (teléfono y/o email), y preguntale explícitamente **"¿esta persona sabe que la vas a poner como referencia y está de acuerdo?"**. Guardá la respuesta tal cual (sí / no / no lo consulté todavía) — nunca asumas un sí.
 
 Todo lo que siga sin respuesta se anota en **Pendientes**. Está bien que queden pendientes; no insistas.
 
 ## 5. Confirmación antes de guardar
 
-Mostrale un **resumen legible** del perfil (no el archivo crudo): datos personales, cada experiencia con sus logros, estudios, skills, idiomas, preferencias, lo que no se muestra y los pendientes. Preguntá: "¿Está todo bien? ¿Querés cambiar o sacar algo?". Aplicá los cambios y repetí el resumen de lo modificado. **No guardes nada hasta recibir un sí claro.**
+Mostrale un **resumen legible** del perfil (no el archivo crudo): datos personales, cada experiencia con sus logros, estudios, skills, idiomas, preferencias, referencias (si las hay, con su estado de autorización), lo que no se muestra y los pendientes. Preguntá: "¿Está todo bien? ¿Querés cambiar o sacar algo?". Aplicá los cambios y repetí el resumen de lo modificado. **No guardes nada hasta recibir un sí claro.**
 
 ## 6. Guardar
 
@@ -79,4 +91,4 @@ Decile en dos o tres frases qué se creó (con rutas relativas: `CV/perfil.md`, 
 
 ## Diagnóstico (temporal, hasta cerrar la Fase 2 del plan)
 
-Solo mientras se valida el plugin en Cowork, al final agregá un bloque breve "Diagnóstico" que diga: qué carpeta detectaste como carpeta de trabajo (nombre, no ruta completa), si `${CLAUDE_PLUGIN_ROOT}` se resolvió o usaste la ruta relativa, y cómo llegó el CV de la persona (archivo, texto pegado, ninguno). Se elimina este bloque antes del release v0.1.0.
+Solo mientras se valida el plugin en Cowork, al final agregá un bloque breve "Diagnóstico" que diga: qué carpeta detectaste como carpeta de trabajo (nombre, no ruta completa), si `${CLAUDE_PLUGIN_ROOT}` se resolvió o usaste la ruta relativa, y cómo llegó la base del perfil (archivo, texto pegado, link de LinkedIn leído, link de LinkedIn bloqueado + export recibido, o ninguno). Se elimina este bloque antes del release v0.1.0.

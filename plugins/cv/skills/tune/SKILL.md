@@ -17,6 +17,7 @@ Los contratos compartidos están en `${CLAUDE_PLUGIN_ROOT}/reference/`. Si esa v
 - `honesty-rules.md`: la regla anti-invención. Es requisito, no sugerencia.
 - `workspace-layout.md`: dónde va cada cosa, nombres de archivos y reglas de rutas.
 - `profile-schema.md`: cómo está escrito el perfil (secciones y IDs).
+- `external-links.md`: cómo (y cuándo no) leer el link de una oferta.
 - `cv-structure.md`: qué secciones lleva el CV, en qué orden, qué va en cada una y cómo se redacta. Es la guía de contenido del paso 6.
 - `locales.md`, `ats-guidelines.md`, `template-styles.md`: idioma, formato y cómo rellenar la plantilla.
 - `postulaciones-format.md`: cómo se registra cada ejecución.
@@ -37,7 +38,7 @@ Leé también `CV/config.md` si existe (plantilla e idioma por defecto). Si su `
 La oferta puede llegar como argumento (`$ARGUMENTS`), pegada en el chat, o adjunta. Si no llegó nada, pedila: "Pasame la oferta: podés pegar el texto, un link o una captura."
 
 - **Texto:** usalo tal cual.
-- **Link:** intentá abrirlo. Muchas páginas (LinkedIn, portales de empleo) bloquean el acceso o piden iniciar sesión. Si no podés leer el contenido completo, no adivines: pedile que pegue el texto de la oferta.
+- **Link:** intentá abrirlo. Muchas páginas (LinkedIn, portales de empleo) bloquean el acceso o piden iniciar sesión: si te encontrás con eso, es contenido no legible (regla dura de `external-links.md`) — **nunca le muestres esa pantalla a la persona ni le pidas que inicie sesión**. En ese caso, o si no podés leer el contenido completo por otro motivo, no adivines: pedile que pegue el texto de la oferta.
 - **Archivo o captura:** leelo (visualmente si es imagen). Si no se lee bien, pedile el texto.
 - **Varias ofertas:** trabajá de a una. Preguntá cuál primero.
 
@@ -81,6 +82,7 @@ Reglas:
 4. **Preguntas:** por cada gap importante, "¿tenés experiencia en esto que no esté en tu perfil?". Si la persona aporta un dato nuevo, usalo solo cuando lo confirme con claridad, y ofrecele guardarlo con `/cv:update-profile` (no lo guardes vos sin su OK).
 5. **Decisiones de formato:** idioma del CV, plantilla (`ats-clean` por defecto; `visual` si la pidió o está en `config.md`) y longitud (según sus preferencias).
 6. **Orden de las secciones:** el CV sale con el orden habitual (`cv-structure.md`). **No lo cambies por tu cuenta.** Si la persona es junior o tiene poca experiencia relevante, o está cambiando de rubro, **sugerí** el orden alternativo con una razón concreta ("como tu experiencia más relevante viene de tu formación y tus proyectos, podría poner Educación y Proyectos antes de Experiencia laboral; si no me decís nada, lo dejo como siempre"). Solo lo aplicás si responde que sí de forma explícita, y vale únicamente para este CV. Si ya te pidió otro orden por su cuenta, aplicalo.
+7. **Referencias (solo si aplica):** revisá si alguna experiencia que va a entrar en este CV tiene una referencia con "autorizó ser mencionada: sí" en el perfil. Si no hay ninguna, no preguntes nada de esto. Si hay al menos una, preguntá: "¿Querés incluir referencias en este CV?". Si dice que sí, preguntá además cómo: "¿Prefiere una línea genérica ('Referencias disponibles a solicitud') o el detalle completo (nombre y contacto de cada una)?" (`cv-structure.md`, sección 9). Esta decisión vale **solo para este CV**; no la guardes como preferencia general.
 
 Terminá preguntando: "¿Genero el CV así o cambiamos algo?". **No generes nada hasta recibir un sí.** Si pide cambios, ajustá y volvé a mostrar lo que cambió.
 
@@ -88,7 +90,7 @@ Terminá preguntando: "¿Genero el CV así o cambiamos algo?". **No generes nada
 
 Con el OK:
 
-1. **Elegí el contenido** según lo aprobado y siguiendo `cv-structure.md`: secciones y orden (el habitual, salvo que la persona haya aceptado otro en el checkpoint), qué logros van, cuántas viñetas por experiencia (más para lo relevante, menos para lo viejo). Respetá la longitud pedida y, si sobra contenido, recortá en el orden que indica `cv-structure.md`.
+1. **Elegí el contenido** según lo aprobado y siguiendo `cv-structure.md`: secciones y orden (el habitual, salvo que la persona haya aceptado otro en el checkpoint), qué logros van, cuántas viñetas por experiencia (más para lo relevante, menos para lo viejo). Respetá la longitud pedida y, si sobra contenido, recortá en el orden que indica `cv-structure.md`. Si en el checkpoint dijo que sí a incluir referencias, agregá la sección "Referencias" (`cv-structure.md`, sección 9) en el formato que eligió, usando solo las que tengan "autorizó ser mencionada: sí"; si no dijo que sí, no agregues esa sección.
 2. **Redactá** cada sección como indica `cv-structure.md`, en el idioma elegido:
    - Reformulá con verbos de acción y buena redacción, sin cambiar significado ni magnitud.
    - Usá los términos exactos de la oferta solo donde el perfil respalda el hecho.

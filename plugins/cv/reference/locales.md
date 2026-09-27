@@ -20,8 +20,19 @@ El idioma del CV **sigue el del job posting** (salvo que `CV/config.md` fije otr
 | Idiomas | Idiomas | Languages |
 | Proyectos | Proyectos | Projects |
 | Certificaciones | Certificaciones | Certifications |
+| Referencias | Referencias | References |
 
 Si hay que usar otro idioma, traducí con el título estándar equivalente en ese idioma (nada creativo: es lo que busca un ATS).
+
+## Frase fija: referencias en formato "línea genérica"
+
+Cuando `tune` incluye referencias en formato de línea genérica (`cv-structure.md`, sección 9), usá exactamente esta frase según el idioma del CV:
+
+| `es` | `en` |
+|---|---|
+| Referencias disponibles a solicitud | References available upon request |
+
+Para otro idioma, usá la fórmula equivalente estándar de ese idioma (es una frase de uso muy común en CVs; no la traduzcas literalmente palabra por palabra si el idioma tiene su propia fórmula fija).
 
 ## Idioma del documento (`w:lang`)
 
@@ -46,9 +57,9 @@ Usá el mismo formato en todo el documento. Si el perfil solo tiene el año, mos
 
 ## Convenciones por país
 
-Son tendencias, no reglas. La preferencia de la persona (en **Preferencias** del perfil) manda, y lo que esté en **No mostrar** nunca aparece.
+Son tendencias, no reglas. La preferencia de la persona (en **Preferencias** del perfil) manda, y lo que esté en **No mostrar** nunca aparece. La longitud del CV no depende del país: eso lo define `cv-structure.md` (sección "Longitud y cómo recortar").
 
-- **EE. UU., Canadá, Reino Unido, Australia:** sin foto, sin fecha de nacimiento, estado civil ni nacionalidad. Normalmente 1 página (2 si hay mucha experiencia).
+- **EE. UU., Canadá, Reino Unido, Australia:** sin foto, sin fecha de nacimiento, estado civil ni nacionalidad.
 - **Latinoamérica:** hay variación. Muchas empresas aceptan CV sin foto; datos como edad o estado civil aparecen a veces, pero **no los agregues** salvo que la persona los pida y estén en su perfil.
 - **España, Alemania, Francia:** algunos mercados esperan más datos personales o foto, pero las plantillas del plugin son ATS-first y no llevan foto. Si la persona la quiere, decile que ese CV va a ser una versión aparte, fuera de las plantillas ATS.
 - Ante la duda, sobrio: sin datos personales sensibles.
