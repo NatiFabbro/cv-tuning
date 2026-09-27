@@ -1,0 +1,12 @@
+{
+  "name": "cv",
+  "version": "1.0.0",
+  "description": "Arma tu perfil maestro y afina tu CV para cada job posting.",
+  "author": {
+    "name": "NatiFabbro"
+  },
+  "homepage": "https://github.com/NatiFabbro/cv-tuning",
+  "repository": "https://github.com/NatiFabbro/cv-tuning",
+  "license": "CC0-1.0",
+  "keywords": ["cv", "resume", "job-posting", "ats"]
+}

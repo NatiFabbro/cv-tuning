@@ -1,0 +1,27 @@
+# Datos personales: nunca deben entrar al repo.
+# Los patrones van anclados a la raíz (/) a propósito: en Windows git ignora
+# mayúsculas/minúsculas, y un `CV/` sin anclar también ignoraría `plugins/cv/`.
+
+# Carpeta de trabajo de pruebas. Todo lo que un skill crea vive siempre
+# bajo CV/ (ver plugins/cv/reference/workspace-layout.md), así que ignorar
+# esta carpeta alcanza; no hace falta repetir cvs/, postulaciones/, etc. sueltos.
+/CV/
+
+# CVs generados fuera de la carpeta de trabajo
+/output/
+/out/
+
+# Configuración local de Claude Code
+/.claude/settings.local.json
+
+# Notas de trabajo internas: plan de implementación y protocolo de pruebas.
+# No son para consumo público; se quedan locales.
+/docs/features/
+
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+.vscode/
+.idea/

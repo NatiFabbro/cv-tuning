@@ -1,0 +1,20 @@
+[
+  {"query": "tengo esta oferta de trabajo de analista de datos y quiero adaptar mi CV para que encaje, ¿me ayudás?", "should_trigger": true, "skill": "tune"},
+  {"query": "me pasaron el link de una vacante en una fintech, armame un CV para ese puesto con mi perfil", "should_trigger": true, "skill": "tune"},
+  {"query": "tunear mi cv para este job posting: we are hiring a customer success manager with 3+ years of experience...", "should_trigger": true, "skill": "tune"},
+  {"query": "qué me falta en mi perfil para postularme a este puesto? (captura de una oferta adjunta)", "should_trigger": true, "skill": "tune"},
+  {"query": "quiero armar mi CV desde cero, nunca hice uno", "should_trigger": true, "skill": "setup"},
+  {"query": "te paso mi CV en PDF para que lo cargues como base de mi perfil profesional", "should_trigger": true, "skill": "setup"},
+  {"query": "configurame la carpeta para mis CVs y hacé mi perfil", "should_trigger": true, "skill": "setup"},
+  {"query": "cambié de trabajo la semana pasada, agregalo a mi perfil: ahora soy analista senior en Datavía desde marzo", "should_trigger": true, "skill": "update-profile"},
+  {"query": "me acordé de un número para un logro de mi último trabajo, ¿lo sumamos a mi perfil?", "should_trigger": true, "skill": "update-profile"},
+  {"query": "escribime una carta de presentación para esta oferta de marketing", "should_trigger": false},
+  {"query": "revisá mi CV actual y decime qué mejorarías (no tengo ninguna oferta en mente)", "should_trigger": false},
+  {"query": "preparame para la entrevista de mañana en esta empresa: qué preguntas me pueden hacer", "should_trigger": false},
+  {"query": "optimizame el perfil de LinkedIn, el titular y el 'acerca de'", "should_trigger": false},
+  {"query": "explicame qué es un ATS y cómo funcionan los filtros de CVs", "should_trigger": false},
+  {"query": "convertí este documento Word a PDF y unilo con otro PDF de mi portfolio", "should_trigger": false},
+  {"query": "armame un currículum creativo con foto y colores para diseñadores en Canva, sin ningún puesto en particular", "should_trigger": false},
+  {"query": "traducime este texto de mi trabajo final de la facultad al inglés", "should_trigger": false},
+  {"query": "escribí un script de Python que lea los PDF de una carpeta y me extraiga los emails", "should_trigger": false}
+]
