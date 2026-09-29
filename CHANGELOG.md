@@ -4,6 +4,11 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). E
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-09-29
+
+### Fixed
+- `/cv:setup`: si el CV que se sube trae una foto, ya no se guarda en el perfil (no hay campo para eso y las plantillas no la usan). Si la persona pregunta, se le explica que los CVs salen sin foto por ser ATS-first.
+
 ## [1.3.0] - 2026-09-29
 
 ### Added

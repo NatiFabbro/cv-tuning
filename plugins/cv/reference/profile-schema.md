@@ -66,7 +66,7 @@ Dos o tres líneas solo con hechos del perfil, redactadas según `voz-y-persona.
 
 ## Preferencias
 - **Roles objetivo:**
-- **País y convenciones:** (ver locales.md: foto, fecha de nacimiento, largo, etc.)
+- **País y convenciones:** (ver locales.md: fecha de nacimiento, largo, etc.). La foto no se guarda en el perfil: las plantillas no la llevan.
 - **Idioma por defecto del CV:**
 - **Tono:** (sobrio / cercano / técnico…)
 - **Longitud:** (1 página / 2 páginas / lo que haga falta)

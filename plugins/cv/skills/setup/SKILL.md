@@ -58,12 +58,13 @@ Preguntá: "¿Tenés un CV actual, o preferís arrancar desde tu LinkedIn? Podé
 2. Extraé los datos al esquema del perfil (`profile-schema.md`): datos personales, experiencias con sus logros, educación, skills, idiomas, proyectos, certificaciones. Asigná los IDs (`E1`, `E1.L1`…).
 3. **Extraé solo lo que está escrito.** No completes fechas, cargos ni números que falten; lo dudoso o faltante va a **Pendientes**. Respetá los números tal cual aparecen.
 4. Si el CV no tiene fechas o el orden es confuso, preguntá antes de suponer.
-5. **Si el CV o el LinkedIn trae un resumen o "Acerca de" ya escrito**, no lo copies tal cual al **Resumen base**: reformulalo siguiendo `voz-y-persona.md` (nunca tercera persona; nominalizado por defecto en español). Los hechos que cuenta se mantienen igual, cambia solo cómo está redactado.
+5. **Foto:** si el CV trae una foto, **no la guardes ni la referencies en el perfil** (no hay campo para eso): las plantillas no llevan foto (`cv-structure.md`). No hace falta avisarlo en este momento; solo si la persona pregunta por la foto, o al confirmar el perfil si la mencionó, explicale que los CVs generados salen sin foto por ser ATS-first (`locales.md`).
+6. **Si el CV o el LinkedIn trae un resumen o "Acerca de" ya escrito**, no lo copies tal cual al **Resumen base**: reformulalo siguiendo `voz-y-persona.md` (nunca tercera persona; nominalizado por defecto en español). Los hechos que cuenta se mantienen igual, cambia solo cómo está redactado.
 
 ### 3b. Pasó un link a su perfil de LinkedIn
 
 1. Intentá abrir el link (regla de `external-links.md`: si aparece una pantalla para iniciar sesión o cualquier muro parecido, es contenido no legible; **nunca la muestres ni le pidas a la persona que inicie sesión**).
-2. **Si se puede leer** (sin ningún muro de por medio): extraé los datos igual que en 3a (puntos 2 a 5): solo lo que está escrito, con los mismos IDs, y el resumen reformulado según `voz-y-persona.md` si trae uno.
+2. **Si se puede leer** (sin ningún muro de por medio): extraé los datos igual que en 3a (puntos 2 a 6): solo lo que está escrito, con los mismos IDs, y el resumen reformulado según `voz-y-persona.md` si trae uno.
 3. **Si está bloqueado:** es lo más frecuente, LinkedIn no deja ver casi ningún perfil sin sesión iniciada. Decíselo con calma y pedile una de estas dos cosas, lo que le resulte más fácil:
    - Un PDF de su perfil: en LinkedIn, desde su perfil, "Más" (o los tres puntos) → "Guardar en PDF" (el nombre exacto puede variar según el idioma de su cuenta).
    - El archivo completo que exporta LinkedIn: "Configuración y privacidad" → "Privacidad de los datos" → "Obtener una copia de tus datos".
