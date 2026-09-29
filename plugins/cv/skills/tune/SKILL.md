@@ -14,24 +14,27 @@ Escribí para gente no técnica: claro y sin jerga. Los términos "ATS" y "keywo
 
 Los contratos compartidos están en `${CLAUDE_PLUGIN_ROOT}/reference/`. Si esa variable no se resuelve, usá la ruta relativa a la carpeta de este skill: `../../reference/`. Leé antes de seguir (lo que hace falta para los pasos 1 a 5; el resto se lee más adelante, justo antes del paso que lo necesita):
 
+- `surface-detection.md`: si estás en modo carpeta o en modo chat (una sola vez por conversación). Leelo primero.
 - `honesty-rules.md`: la regla anti-invención. Es requisito, no sugerencia.
-- `workspace-layout.md`: dónde va cada cosa, nombres de archivos y reglas de rutas.
+- `workspace-layout.md` (modo carpeta) o `chat-file-contract.md` (modo chat): dónde va cada cosa, nombres de archivos y reglas de rutas, o cómo pedir y entregar archivos.
 - `profile-schema.md`: cómo está escrito el perfil (secciones y IDs).
 - `external-links.md`: cómo (y cuándo no) leer el link de una oferta.
 - `cv-structure.md`: qué secciones lleva el CV, en qué orden, qué va en cada una y cómo se redacta. Es la guía de contenido del paso 6.
 - `voz-y-persona.md`: cómo redactar el resumen y las viñetas (nunca en tercera persona).
 - `locales.md`: idioma, títulos de sección y convenciones por país.
 
-Trabajá siempre en la **carpeta de trabajo activa de la sesión**. No escribas rutas absolutas en ningún archivo; mostrá rutas relativas.
+**En modo carpeta:** trabajá siempre en la **carpeta de trabajo activa de la sesión**. No escribas rutas absolutas en ningún archivo; mostrá rutas relativas. **En modo chat:** no hay carpeta; vas a pedir `perfil.md` (y `config.md`) como adjuntos en el paso 1.
 
 ## 1. Guard clause: ¿hay perfil?
 
-Buscá `CV/perfil.md`.
+**En modo chat:** pedile a la persona que suba `perfil.md` (y `config.md` si lo tiene). Si no lo tiene, explicale que primero hay que armar el perfil (es rápido y se hace una sola vez) y arrancá el skill `setup` (`/cv:setup`) en la misma conversación; cuando termine, volvé a este paso con los archivos que te acabe de dar y la oferta que ya tenías. No sigas sin perfil. Si parece perdida con esto, mencioná `/cv:help`.
+
+**En modo carpeta:** buscá `CV/perfil.md`.
 
 - **No existe:** explicale que primero hay que armar el perfil (es rápido y se hace una sola vez) y arrancá el skill `setup` (`/cv:setup`) en la misma conversación. Cuando termine, volvé al paso 2 con la oferta que ya tenías. No sigas sin perfil.
 - **Existe:** leelo entero. Si su `version-esquema` es mayor a la que conocés (`1`), avisá y frená.
 
-Leé también `CV/config.md` si existe (plantilla e idioma por defecto). Si su `version-layout` es mayor a la que conocés (`1`), no frenes por eso: avisá que hay un ajuste que no reconocés y usá los valores por defecto de `workspace-layout.md` para lo que no entiendas.
+Leé también `CV/config.md` si existe (plantilla e idioma por defecto), o el que te hayan subido en modo chat. Si su `version-layout` es mayor a la que conocés (`1`), no frenes por eso: avisá que hay un ajuste que no reconocés y usá los valores por defecto de `workspace-layout.md` (o `chat-file-contract.md` en modo chat) para lo que no entiendas.
 
 ## 2. Recibir la oferta
 
@@ -101,11 +104,11 @@ Con el OK:
    - Titular: el título del perfil, o una descripción que el perfil respalde. Nunca un título que la persona no tiene.
 3. **Rellená la plantilla** siguiendo `template-styles.md`: la plantilla está en `${CLAUDE_PLUGIN_ROOT}/assets/templates/<plantilla>.docx` (o `../../assets/templates/<plantilla>.docx`). Si hay Python disponible (ver chequeo de `setup`), usá `${CLAUDE_PLUGIN_ROOT}/assets/scripts/build_cv.py` (o `../../assets/scripts/build_cv.py`): armá el JSON de contenido con los párrafos y estilos `CV*` (formato en el encabezado del script) y llamalo — copia la plantilla, agrega el contenido, ajusta el idioma del documento y verifica el guardado, todo en un paso. Si no hay Python, seguí el método manual de `template-styles.md`. Sin formato directo en ningún caso. Si algo requiere instalar dependencias más allá de Python, frená y decíselo.
 4. **El idioma del documento** (`template-styles.md`, paso "Idioma del documento"; código según `locales.md`) es obligatorio, no opcional: si el CV no queda en español y no se corrige, Word va a marcar todo el texto como error ortográfico. El script del paso anterior ya lo hace solo (parámetro `"lang"`); en el método manual es un paso aparte que no podés saltear.
-5. **Determiná la carpeta de esta postulación** (`workspace-layout.md`): `CV/postulaciones/<AAAA-MM-DD_empresa_puesto>` (agregá `_2`, `_3`… si ya existe; no pises nada). Es la única vez que chequeás esta colisión: el CV y el registro (paso 9) van los dos ahí adentro, ya resuelta. Guardá el DOCX ahí como `CV_<Nombre-Apellido>_<Empresa>.docx`.
+5. **En modo carpeta, determiná la carpeta de esta postulación** (`workspace-layout.md`): `CV/postulaciones/<AAAA-MM-DD_empresa_puesto>` (agregá `_2`, `_3`… si ya existe; no pises nada). Es la única vez que chequeás esta colisión: el CV y el registro (paso 9) van los dos ahí adentro, ya resuelta. Guardá el DOCX ahí como `CV_<Nombre-Apellido>_<Empresa>.docx`. **En modo chat**, no hay carpeta que resolver ni colisión que chequear (`chat-file-contract.md`): armá el DOCX con el mismo nombre de archivo y entregalo para descargar en el paso 8.
 
 ## 7. Verificación (antes de entregar)
 
-Antes de revisar el contenido, verificá el guardado en sí según `workspace-layout.md` ("Verificación de guardado"): abrí de nuevo el DOCX que acabás de guardar (una lectura fresca del archivo en disco, no lo que tenías compuesto en memoria) y confirmá que el contenido está ahí. Si no podés confirmarlo, no sigas: decíselo a la persona y reintentá el guardado antes de dar nada por entregado.
+Antes de revisar el contenido, verificá el guardado en sí (`workspace-layout.md` en modo carpeta, `chat-file-contract.md` en modo chat — sección "Verificación de guardado" / "Verificación antes de entregar"): abrí de nuevo el DOCX que acabás de generar (una lectura fresca del archivo, no lo que tenías compuesto en memoria) y confirmá que el contenido está ahí. Si no podés confirmarlo, no sigas: decíselo a la persona y reintentá antes de dar nada por entregado.
 
 Recorré **cada línea** del CV generado y contrastala con el perfil, usando el checklist único de `cv-structure.md` ("Checklist antes de entregar"): repasalo entero, no lo repitas de memoria ni salgas de él.
 
@@ -113,17 +116,22 @@ Si algo no pasa, corregí el CV (sacalo o reescribilo) y volvé a verificar. Gua
 
 ## 8. Salidas
 
-1. **PDF:** convertí el DOCX a PDF en la misma carpeta con lo que esté disponible (por ejemplo LibreOffice en modo headless, ver `template-styles.md`). Contá las páginas y comparalas con la longitud pedida; si sobran, acortá contenido y regenerá. Si no hay forma de convertir sin instalar nada, decilo: el DOCX ya sirve y el PDF se puede exportar desde Word.
+1. **PDF:** intentá convertir el DOCX a PDF con lo que esté disponible (por ejemplo LibreOffice en modo headless, ver `template-styles.md`). Es una política de "intentalo y seguí": si el comando no existe o falla (esperable en el sandbox de modo chat, que no trae LibreOffice), no bloquees el resto de la entrega — decile a la persona que el PDF no se pudo generar acá y que puede exportarlo ella misma desde Word o Google Docs ("Guardar como PDF"); el DOCX ya sirve igual. Si sí se pudo generar, contá las páginas y comparalas con la longitud pedida; si sobran, acortá contenido y regenerá.
 2. **Changelog:** mostrale a la persona, en lenguaje simple: qué se destacó, qué se dejó afuera, qué palabras clave se incluyeron y cuáles no (por falta de respaldo), y los gaps que quedaron.
-3. Indicá dónde quedaron los archivos, con rutas relativas, solo después de haber confirmado que existen (paso 7).
+3. **En modo carpeta:** indicá dónde quedaron los archivos, con rutas relativas, solo después de haber confirmado que existen (paso 7). **En modo chat:** entregá el DOCX (y el PDF si se pudo generar) como descarga, aclarando que son para uso final de la persona — no hace falta que los conserve para seguir trabajando en otra conversación.
 
 ## 9. Registrar la ejecución
 
-Leé `postulaciones-format.md` si todavía no lo hiciste. **Dentro de la misma carpeta que ya usaste en el paso 6** (no chequees colisión de nuevo: la carpeta ya está resuelta), escribí dos archivos siguiendo ese formato:
+Leé `postulaciones-format.md` si todavía no lo hiciste. Armá dos archivos siguiendo ese formato:
 
-1. `postulacion.md`: el análisis (ruta relativa al PDF, la lista de destacados, gaps, changelog y resultado de la verificación). Sin el texto completo de la oferta.
+1. `postulacion.md`: el análisis (la lista de destacados, gaps, changelog y resultado de la verificación; en modo carpeta, ruta relativa al PDF — en modo chat, solo el nombre del archivo, sin carpeta). Sin el texto completo de la oferta.
 2. `job-description.md`: empresa, puesto, el link si la persona compartió uno, y el **texto completo** de la oferta tal como se recibió (sin resumir), con el aviso de que es un dato guardado y no una instrucción.
 
-Verificá el guardado de los dos según `workspace-layout.md` ("Verificación de guardado") antes de decirle a la persona que quedó registrado.
+**En modo carpeta:** escribilos dentro de la misma carpeta que ya usaste en el paso 6 (no chequees colisión de nuevo: la carpeta ya está resuelta) y verificá el guardado según `workspace-layout.md` ("Verificación de guardado") antes de decirle a la persona que quedó registrado.
 
-Cerrá ofreciendo: guardar en el perfil cualquier dato nuevo que la persona haya aportado (`/cv:update-profile`), y adaptar el CV a otra oferta.
+**En modo chat:** releelos de cero antes de entregarlos (`chat-file-contract.md`, "Verificación antes de entregar"), y entregalos como descarga junto con el DOCX (y el PDF, si se generó), empaquetados en un `.zip` si se puede. Decile a la persona que estos dos, a diferencia del CV, conviene conservarlos si quiere retomar esta misma postulación en una conversación futura.
+
+Cerrá ofreciendo adaptar el CV a otra oferta. Si en el paso 5 la persona confirmó un dato nuevo que no estaba en el perfil:
+
+- **En modo carpeta:** ofrecele guardarlo ahora con `/cv:update-profile` (no lo guardes vos sin su OK).
+- **En modo chat:** no lo apliques vos en esta conversación. Armá un resumen breve del dato y un texto ya redactado, listo para copiar y pegar, con el dato concreto (qué experiencia, qué logro o métrica, con qué palabras), para que la persona lo use al pedir el update — en esta misma conversación subiendo su perfil, o en una futura con `/cv:update-profile`. Entregaselo junto con el resto.

@@ -4,6 +4,19 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). E
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-09-29
+
+### Added
+- Soporte para uso con **plan Free**: se instala del mismo modo que en Cowork (`Customize → Plugins`), y cada skill detecta solo si hay una carpeta de trabajo conectada o no (`reference/surface-detection.md`). 
+    - Sin carpeta conectada (plan Free), los skills piden los archivos de entrada como adjuntos y entregan los de salida para descargar (`reference/chat-file-contract.md`).
+    - con carpeta conectada (Cowork), el comportamiento no cambió: lee o escribe en `CV/`.
+- Skill `/cv:help`: preguntas frecuentes sobre el uso del plugin en Cowork y en el plan Free (perfil perdido, archivo equivocado, aviso de versión más nueva, cómo retomar una postulación, cómo activar la ejecución de código si no aparece disponible).
+
+### Changed
+- `/cv:tune`: 
+    - la conversión de DOCX a PDF pasa a ser fail-open. 
+    - Sin carpeta conectada (plan Free), si la persona confirma un dato nuevo que no estaba en el perfil, `tune` ya no ofrece correr `/cv:update-profile` como paso aparte: entrega un resumen del dato y un texto listo para copiar y pegar, para no depender de que el perfil siga disponible en otra conversación.
+
 ## [1.2.0] - 2026-09-27
 
 Fixes y features de la tercera ronda de pruebas manuales en Cowork, más el script de generación de DOCX.

@@ -8,20 +8,47 @@ Este README tiene dos partes: una para quienes solo quieren **usar** el plugin (
 
 ## Instalación y uso 
 
-### Cómo se usa (3 pasos)
+### Cómo se usa
 
-1. **Instalá el plugin** en Cowork: `Customize` → `Plugins` → `Add marketplace` con `NatiFabbro/cv-tuning` → buscá `cv` en `Discover` e instalalo. (Ver [Instalar y actualizar](#instalar-y-actualizar) para el detalle paso a paso.)
-2. **Armá tu perfil, una sola vez.** Conectá una carpeta de trabajo y escribí `/cv:setup`. Podés pasarle tu CV actual (PDF, Word o texto) o contarle tu experiencia si no tenés uno. Te muestra un resumen y no guarda nada hasta que digas que sí.
-3. **Adaptá tu CV a cada oferta.** Escribí `/cv:tune` y pegá el texto de la oferta, el link o una captura. Antes de generar nada, te muestra qué va a destacar y qué te falta para el puesto. Cuando confirmás, te entrega el CV en **Word (DOCX) y PDF**.
-4. **Actualizá tu perfil** con `/cv:update-profile`. Agrega, quitá, modificá lo que quieras, vas a tener las versiones anteriores guardadas por si las necesitas.
+1. **Instalá el plugin**: `Customize` → `Plugins` → `Add marketplace` con `NatiFabbro/cv-tuning` → buscá `cv` en `Discover` e instalalo. Se instala igual tengas **Cowork** o el plan **Free** (ver [Instalar y actualizar](#instalar-y-actualizar)).
 
-También podés pedirlo con tus palabras ("armame un CV para esta oferta"); no hace falta escribir el comando.
+A partir de ahí, los pasos son casi los mismos, con una diferencia: si tenés una carpeta de trabajo conectada (Cowork), tu perfil y tus CVs se guardan solos ahí; si no (plan Free, un chat sin carpeta conectada), los subís y los bajás vos mismo. El plugin detecta solo cuál es tu caso, no hace falta elegir nada.
+
+#### En Cowork (con carpeta de trabajo conectada)
+
+1. **Conectá una carpeta** y escribí `/cv:setup` para armar tu perfil, una sola vez. Podés pasarle tu CV actual (PDF, Word o texto) o contarle tu experiencia si no tenés uno. Te muestra un resumen y no guarda nada hasta que digas que sí.
+2. **Adaptá tu CV a cada oferta** con `/cv:tune`: pegá el texto, el link o una captura de la oferta. Antes de generar nada, te muestra qué va a destacar y qué te falta para el puesto. Te entrega el CV en **Word (DOCX)** y **PDF**, guardado en tu carpeta.
+3. **Actualizá tu perfil** con `/cv:update-profile` cuando quieras sumar o corregir algo; vas a tener las versiones anteriores guardadas por si las necesitás.
+
+#### En el plan Free (sin carpeta conectada)
+
+1. Escribí `/cv:setup` para armar tu perfil, una sola vez. No hace falta conectar nada: al final te va a pedir que descargues `perfil.md` y `config.md` — **guardalos**, son la base de cualquier conversación futura sobre tu CV.
+2. Cuando tengas una oferta, escribí `/cv:tune`, subí tu `perfil.md` y `config.md`, y pegá el texto, el link o una captura de la oferta. Te muestra qué va a destacar y qué te falta antes de generar nada. Te entrega el CV en **Word (DOCX)** y, si se pudo generar, **PDF**, para descargar.
+3. Para actualizar tu perfil, escribí `/cv:update-profile` y subí tu `perfil.md` actual; te devuelve uno nuevo para que descargues y uses de ahí en más.
+
+No es obligatorio, pero ayuda: si armás una carpeta `CV/` propia (en tu compu o en Drive) y guardás ahí lo que vas descargando, con esta misma organización, te va a resultar más fácil encontrar todo después. Es exactamente la que arma Cowork solo:
+
+```
+CV/
+├── perfil.md                              # tu perfil vigente
+├── config.md                              # tus preferencias (plantilla, idioma…)
+├── historial-perfiles/                    # versiones anteriores de perfil.md
+│   └── perfil_2026-09-20.md
+└── postulaciones/                         # una subcarpeta por cada CV que generaste
+    └── 2026-09-26_acme_disenadora-ux/
+        ├── postulacion.md                 # análisis: qué se destacó, gaps, changelog
+        ├── job-description.md             # la oferta completa, tal como te llegó
+        ├── CV_Nombre-Apellido_Acme.docx
+        └── CV_Nombre-Apellido_Acme.pdf
+```
+
+En los dos casos también podés pedirlo con tus palabras ("armame un CV para esta oferta"); no hace falta escribir el comando. Si tenés dudas sobre cómo usarlo en tu caso, pedile `/cv:help`.
 
 ### Instalar y actualizar
 
 **Instalar:**
 
-1. En Cowork, abrí **Customize** en la barra lateral y elegí **Plugins**.
+1. Abrí **Customize** en la barra lateral y elegí **Plugins** (está disponible tengas o no Cowork, incluido el plan gratuito).
 2. Elegí **Add marketplace** y pegá `NatiFabbro/cv-tuning` (o la URL completa `https://github.com/NatiFabbro/cv-tuning`).
 3. Elegí **Discover** para ver los plugins disponibles, buscá **cv** y tocá **Install**. Te va a mostrar los permisos que pide antes de confirmar.
 4. Este plugin no usa conectores (no se conecta a ningún servicio externo ni te pide iniciar sesión en nada); con instalarlo ya podés usar `/cv:setup` y `/cv:tune`.
@@ -30,15 +57,16 @@ También podés pedirlo con tus palabras ("armame un CV para esta oferta"); no h
 
 **Desinstalar:** abrí el plugin `cv` en **Customize → Plugins** y tocá **Remove**.
 
-Superficie soportada: **Cowork**. Claude Code y otras IAs quedan para más adelante.
+El plugin se instala igual tengas Cowork o el plan Free: `Customize → Plugins` está disponible en los dos, y no hace falta ningún paso extra ni subir nada por separado para usarlo en Free (ver [Cómo se usa](#cómo-se-usa) arriba para el detalle de cada caso).
 
 ### Qué hace cada comando
 
 | Comando | Para qué |
 |---|---|
-| `/cv:setup` | Crea tu carpeta `CV/` y tu perfil. Se usa la primera vez. |
+| `/cv:setup` | Arma tu perfil. Se usa la primera vez (y para rehacerlo desde cero). |
 | `/cv:tune` | Adapta tu CV a un puesto: analiza la oferta, marca gaps, pide tu OK, genera DOCX + PDF y guarda un registro de la postulación. |
 | `/cv:update-profile` | Suma o corrige cosas en tu perfil (un trabajo nuevo, un número que recordaste) mostrándote los cambios antes de guardar. |
+| `/cv:help` | Responde preguntas frecuentes sobre cómo usar el plugin, en Cowork o en el plan Free. |
 
 ### Principios
 
@@ -50,7 +78,8 @@ Superficie soportada: **Cowork**. Claude Code y otras IAs quedan para más adela
 
 ### Tus datos y privacidad
 
-- Tus datos viven **en tu carpeta de trabajo**, en archivos de texto (`CV/perfil.md`, `CV/config.md`, `CV/postulaciones/`, una subcarpeta por cada CV que generás con su registro, el detalle de la oferta, el `.docx` y el `.pdf`). Podés abrirlos, editarlos o borrarlos cuando quieras.
+- **En Cowork**, tus datos viven **en tu carpeta de trabajo**, en archivos de texto (`CV/perfil.md`, `CV/config.md`, `CV/postulaciones/`, una subcarpeta por cada CV que generás con su registro, el detalle de la oferta, el `.docx` y el `.pdf`). Podés abrirlos, editarlos o borrarlos cuando quieras.
+- **En el plan Free**, esos mismos archivos no quedan guardados solos en ningún lado: los subís y los bajás vos en cada conversación, y sos responsable de guardarlos donde quieras. Nada persiste de una conversación a la siguiente salvo lo que vos conserves.
 - El plugin **no tiene servidores propios, no envía datos a ningún lado ni recopila estadísticas.** Los archivos no salen de tu carpeta por obra del plugin.
 - Cuando lo usás, tu perfil y las ofertas que pegues **las procesa Claude** dentro de tu sesión, según las condiciones de tu cuenta de Claude. Si no querés que un dato pase por ahí, no lo cargues en el perfil o marcalo en "No mostrar".
 - Este repositorio no contiene datos de nadie: todo lo que se usa para pruebas es inventado.
@@ -69,8 +98,8 @@ Esta parte asume que sabés leer JSON y moverte en una terminal. Si solo querés
 .claude-plugin/marketplace.json     Catálogo del marketplace
 plugins/cv/                         El plugin (todo lo compartido vive acá dentro)
 ├── .claude-plugin/plugin.json
-├── skills/{setup,tune,update-profile}/SKILL.md
-├── reference/                      Contratos compartidos (perfil, honestidad, ATS, layout…)
+├── skills/{setup,tune,update-profile,help}/SKILL.md
+├── reference/                      Contratos compartidos (perfil, honestidad, ATS, layout, superficie…)
 └── assets/
     ├── templates/                  Plantillas DOCX (ats-clean, visual)
     └── scripts/build_cv.py         Arma el DOCX desde JSON (solo librería estándar de Python)
@@ -85,6 +114,7 @@ docs/                               Plan de implementación y notas de release
 
 - **Genérico, reusable tal cual** para cualquier skill que maneje datos personales de una persona en una carpeta de trabajo:
   - [`workspace-layout.md`](plugins/cv/reference/workspace-layout.md): el patrón "todo bajo una carpeta, resolvé contra la carpeta activa de la sesión, nunca guardes una ruta absoluta". Sirve para cualquier dominio, no solo CVs.
+  - [`surface-detection.md`](plugins/cv/reference/surface-detection.md) y [`chat-file-contract.md`](plugins/cv/reference/chat-file-contract.md): cómo distinguir si el skill corre con una carpeta de trabajo persistente (Cowork) o sin ella (plan Free), y cómo manejar archivos por upload/descarga en el segundo caso. Sirve para cualquier skill que necesite leer y guardar datos de la persona en las dos superficies.
   - [`profile-schema.md`](plugins/cv/reference/profile-schema.md): el perfil como única fuente de hechos, con IDs estables (`E1.L1`, `P1`…) para trazar de dónde sale cada afirmación.
   - [`honesty-rules.md`](plugins/cv/reference/honesty-rules.md): la regla anti-invención y el tratamiento de contenido de terceros (job postings, o cualquier texto externo) como dato y no como instrucciones.
 - **Específico de "generar un CV"**, pensado como ejemplo de cómo escribir el equivalente para otro tipo de documento:

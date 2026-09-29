@@ -12,15 +12,17 @@ Escribí para gente no técnica, una pregunta por vez, sin jerga.
 
 ## Antes de empezar
 
-Los contratos están en `${CLAUDE_PLUGIN_ROOT}/reference/` (si esa variable no se resuelve, usá `../../reference/` relativo a la carpeta de este skill). Leé `profile-schema.md`, `honesty-rules.md` y `workspace-layout.md`.
+Los contratos están en `${CLAUDE_PLUGIN_ROOT}/reference/` (si esa variable no se resuelve, usá `../../reference/` relativo a la carpeta de este skill). Leé, en este orden: `surface-detection.md` (si estás en modo carpeta o en modo chat, una sola vez por conversación), `profile-schema.md`, `honesty-rules.md`, y `workspace-layout.md` (modo carpeta) o `chat-file-contract.md` (modo chat).
 
-Trabajá en la **carpeta de trabajo activa de la sesión**, sin rutas absolutas en ningún archivo.
+**En modo carpeta:** trabajá en la **carpeta de trabajo activa de la sesión**, sin rutas absolutas en ningún archivo. **En modo chat:** no hay carpeta; vas a pedir `perfil.md` (y `config.md`) como adjuntos antes de seguir (paso 1).
 
 ## 1. Guard clause
 
-Si no existe `CV/perfil.md`, explicá que primero hay que armar el perfil y arrancá `/cv:setup`. No sigas sin perfil.
+**En modo chat:** pedile a la persona que suba `perfil.md` (y `config.md` si lo tiene) antes de preguntar qué quiere cambiar. Si no lo tiene, explicá que primero hay que armar el perfil y arrancá `/cv:setup` en la misma conversación; cuando termine, volvé a este paso. No sigas sin perfil.
 
-Si existe, leelo entero antes de preguntar nada, para no pedir datos que ya están. Si su `version-esquema` es mayor a la que conocés (`1`), avisale a la persona que tu versión del plugin es más vieja que su perfil y frená ahí: no lo edites.
+**En modo carpeta:** si no existe `CV/perfil.md`, explicá que primero hay que armar el perfil y arrancá `/cv:setup`. No sigas sin perfil.
+
+En cualquiera de las dos superficies, una vez que tengas el perfil: leelo entero antes de preguntar nada, para no pedir datos que ya están. Si su `version-esquema` es mayor a la que conocés (`1`), avisale a la persona que tu versión del plugin es más vieja que su perfil y frená ahí: no lo edites. Si la persona no tiene perfil y parece perdida, mencioná `/cv:help`.
 
 ## 2. Entender qué cambia
 
@@ -63,9 +65,15 @@ Preguntá: "¿Lo guardo así?". **No escribas nada hasta recibir un sí claro.**
 
 ## 5. Guardar
 
+**En modo carpeta:**
 1. Antes de modificar, **mové** el contenido vigente de `perfil.md` a `CV/historial-perfiles/perfil_AAAA-MM-DD.md` (la fecha de hoy; si ya existe uno con esa fecha, agregá `_2`, `_3`…). Nunca hace falta preguntar por esto. **Siempre esa carpeta y ese patrón de nombre — nunca `CV/perfil.anterior.md` ni ninguna otra variante.** Más detalle en `workspace-layout.md`, sección "`perfil.md` y su historial".
 2. Escribí `CV/perfil.md` con los cambios, respetando el esquema.
 3. Verificá el guardado según `workspace-layout.md` ("Verificación de guardado"): releé el archivo de cero y confirmá que refleja exactamente lo confirmado. Si no podés confirmarlo así, no digas que se guardó: decíselo a la persona y reintentá.
+
+**En modo chat:**
+1. Armá el nuevo `perfil.md` con los cambios, respetando el esquema.
+2. Releelo de cero antes de seguir (`chat-file-contract.md`, "Verificación antes de entregar"): confirmá que refleja exactamente lo confirmado.
+3. Entregaselo a la persona para descargar. Decile que renombre el `perfil.md` que ya tenía a `perfil_AAAA-MM-DD.md` (la fecha de hoy) si quiere conservar el historial, y que use este nuevo archivo como el principal de ahora en más.
 
 ## 6. Cierre
 

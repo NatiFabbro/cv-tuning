@@ -1,6 +1,8 @@
 # Estructura de la carpeta de trabajo
 
-Contrato compartido por todos los skills. Todo vive dentro de una subcarpeta `CV/` de la **carpeta de trabajo activa de la sesión** (la que la persona conectó).
+Contrato compartido por todos los skills **en modo carpeta** (ver `surface-detection.md`). Si estás en modo chat, este archivo no aplica: seguí `chat-file-contract.md` en su lugar.
+
+Todo vive dentro de una subcarpeta `CV/` de la **carpeta de trabajo activa de la sesión** (la que la persona conectó).
 
 ## Regla de rutas
 

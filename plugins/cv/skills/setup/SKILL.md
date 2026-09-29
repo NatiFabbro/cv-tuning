@@ -13,17 +13,22 @@ Escribí para gente no técnica: frases cortas, una pregunta por vez, sin palabr
 
 Los contratos compartidos están en `${CLAUDE_PLUGIN_ROOT}/reference/`. Si esa variable no se resuelve, usá la ruta relativa a la carpeta de este skill: `../../reference/`. Leé, en este orden:
 
-1. `workspace-layout.md`: dónde va cada cosa y las reglas de rutas.
-2. `profile-schema.md`: cómo se escribe el perfil (secciones, IDs, reglas).
-3. `honesty-rules.md`: reglas sobre cómo tratar los datos, por ejemplo: no inventar nada.
-4. `external-links.md`: cómo (y cuándo no) leer un link de LinkedIn u otro sitio.
-5. `voz-y-persona.md`: cómo redactar el Resumen base (nunca en tercera persona).
+1. `surface-detection.md`: si estás en modo carpeta o en modo chat (una sola vez por conversación).
+2. `workspace-layout.md` (modo carpeta) o `chat-file-contract.md` (modo chat): dónde va cada cosa y las reglas de rutas, o cómo pedir y entregar archivos.
+3. `profile-schema.md`: cómo se escribe el perfil (secciones, IDs, reglas).
+4. `honesty-rules.md`: reglas sobre cómo tratar los datos, por ejemplo: no inventar nada.
+5. `external-links.md`: cómo (y cuándo no) leer un link de LinkedIn u otro sitio.
+6. `voz-y-persona.md`: cómo redactar el Resumen base (nunca en tercera persona).
 
 ## 1. Carpeta de trabajo
 
-Trabajá dentro de la **carpeta de trabajo activa de esta sesión**. Si no hay ninguna conectada, pedile a la persona que conecte una carpeta (una donde quiera guardar sus CVs) y esperá. No escribas rutas absolutas en ningún archivo; en mensajes mostrá siempre rutas relativas.
+**En modo carpeta:** trabajá dentro de la **carpeta de trabajo activa de esta sesión**. Si no hay ninguna conectada, pedile a la persona que conecte una carpeta (una donde quiera guardar sus CVs) y esperá. No escribas rutas absolutas en ningún archivo; en mensajes mostrá siempre rutas relativas.
+
+**En modo chat:** no hay carpeta que conectar. Seguí `chat-file-contract.md`: vas a pedir los archivos que necesites como adjuntos, y vas a entregar los que generes como descarga al final.
 
 ## 1b. Chequeo silencioso de Python
+
+**Solo en modo carpeta.** En modo chat, saltealo y seguí directo al paso 2: el entorno de ejecución de código de esa superficie ya trae Python, y no hay forma de ofrecerle a la persona instalar nada ahí (no tiene una terminal propia).
 
 `tune` arma el CV con un script que necesita Python (ver `template-styles.md`). No es indispensable — sin él, igual se arma el CV, a mano y más lento — pero conviene saber ahora si está disponible, para ofrecer instalarlo recién en el cierre (paso 7), sin interrumpir el armado del perfil.
 
@@ -31,7 +36,9 @@ Corré un chequeo simple (`python3 --version`, o `python --version` si el primer
 
 ## 2. Ver qué hay (no pisar nada)
 
-Buscá `CV/` y dentro `perfil.md` y `config.md`.
+**En modo chat:** no hay disco que mirar. Preguntá directo: "¿ya tenés un perfil de una conversación anterior?". Si dice que no, seguí con el paso 3. Si dice que sí, pedile que suba `perfil.md` (y `config.md` si lo tiene) y seguí la rama "Existe `CV/perfil.md`" de abajo, con una diferencia en la opción (c): en vez de mover el contenido a `CV/historial-perfiles/`, entregale ese perfil viejo como descarga aparte con el nombre `perfil_AAAA-MM-DD.md` (la fecha de hoy) antes de guardar el nuevo.
+
+**En modo carpeta:** buscá `CV/` y dentro `perfil.md` y `config.md`.
 
 - si **No existe nada:** seguí con el paso 3.
 - si **Existe `CV/perfil.md`:** si su `version-esquema` es mayor a la que conocés (`1`), avisale a la persona que tu versión del plugin es más vieja que su perfil y frená ahí (no lo toques). Si no, contale, en una línea, qué tiene (nombre y cantidad de experiencias). Preguntale qué prefiere: (a) dejarlo como está y salir, (b) agregarle cosas (derivá a `/cv:update-profile`), o (c) rehacerlo desde cero. Solo con un sí claro a (c) seguí, y antes de escribir **mové** el contenido vigente de `perfil.md` a `CV/historial-perfiles/perfil_AAAA-MM-DD.md` (la fecha de hoy; si ya existe uno con esa fecha, agregá `_2`, `_3`…). Nunca hace falta preguntar por esto. **Siempre esa carpeta y ese patrón de nombre — nunca `CV/perfil.anterior.md` ni ninguna otra variante.** Más detalle en `workspace-layout.md`, sección "`perfil.md` y su historial".
@@ -92,14 +99,24 @@ Mostrale un **resumen legible** del perfil (no el archivo crudo): datos personal
 
 Con la confirmación:
 
+**En modo carpeta:**
 1. Creá, si no existen, `CV/` y `CV/postulaciones/`.
 2. Escribí `CV/perfil.md` siguiendo `profile-schema.md`.
 3. Si no existe, escribí `CV/config.md` con los valores por defecto de `workspace-layout.md` (plantilla `ats-clean`, formatos `docx, pdf`, idioma "según el posting"), ajustando el idioma solo si la persona pidió uno fijo. **No guardes rutas absolutas** en ningún archivo.
 4. Verificá el guardado según `workspace-layout.md` ("Verificación de guardado"): releelo de cero, no lo des por hecho.
 
+**En modo chat:**
+1. Armá `perfil.md` siguiendo `profile-schema.md` y `config.md` con los mismos valores por defecto de arriba.
+2. Releé los dos de cero antes de seguir (`chat-file-contract.md`, "Verificación antes de entregar"): no los des por buenos solo porque acabás de escribirlos.
+3. Entregaselos a la persona para descargar, empaquetados en un `.zip` si podés (`chat-file-contract.md`).
+
 ## 7. Cierre
 
-Decile en dos o tres frases qué se creó (con rutas relativas: `CV/perfil.md`, `CV/config.md`), citando un detalle concreto de lo que confirmaste al releer (por ejemplo, algo de su primera experiencia), no solo "listo, guardado". Contale que sus datos quedan en su carpeta y que el siguiente paso es pasarle un puesto: "Cuando tengas una oferta, escribime `/cv:tune` y pegá el texto, el link o una captura". Si quedaron pendientes, mencioná cuántos y que puede completarlos cuando quiera con `/cv:update-profile`.
+Decile en dos o tres frases qué se creó, citando un detalle concreto de lo que confirmaste al releer (por ejemplo, algo de su primera experiencia), no solo "listo, guardado". Si quedaron pendientes, mencioná cuántos y que puede completarlos cuando quiera con `/cv:update-profile`.
+
+**En modo carpeta:** contale que sus datos quedan en su carpeta (rutas relativas: `CV/perfil.md`, `CV/config.md`) y que el siguiente paso es pasarle un puesto: "Cuando tengas una oferta, escribime `/cv:tune` y pegá el texto, el link o una captura".
+
+**En modo chat:** remarcá que tiene que **conservar** los dos archivos que le acabás de dejar (`perfil.md` y `config.md`): son la base de cualquier conversación futura sobre su CV, y no van a estar guardados en ningún otro lado. Contale que, cuando tenga una oferta, puede empezar una conversación nueva con `/cv:tune`, subir estos dos archivos y pegar la oferta. Si en algún momento parece perdida con esto, mencioná `/cv:help`.
 
 **Si el chequeo del paso 1b dio que no hay Python instalado**, agregá, después de todo lo anterior, una mención breve y opcional (no la mezcles con lo esencial de arriba, ni la conviertas en un problema): algo como "Una cosa aparte, sin apuro: para armar el CV en Word uso un programita que necesita Python, y no lo tenés instalado en esta compu. No hace falta para nada de lo que ya hicimos, y sin él igual te armo el CV (un poco más manual). Si en algún momento querés, te puedo guiar a instalarlo, tarda un par de minutos. ¿Querés ahora, más adelante, o preferís no instalarlo?". Guardá lo que responda:
 

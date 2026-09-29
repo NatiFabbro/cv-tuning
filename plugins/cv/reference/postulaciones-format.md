@@ -47,7 +47,7 @@ estado: generado
 
 ### Reglas
 
-- `cv:` es una **ruta relativa** a la carpeta de trabajo, nunca absoluta.
+- `cv:` es una **ruta relativa** a la carpeta de trabajo, nunca absoluta. En modo chat, donde no hay carpeta de trabajo (`chat-file-contract.md`), va solo el nombre del archivo, sin ruta.
 - `estado`: arranca en `generado`. La persona puede cambiarlo a mano (`enviado`, `entrevista`, `descartado`…); el plugin no lo pisa.
 - No copies el texto completo del posting acá, aunque sea corto; alcanza con los requisitos clave y el link. El texto completo va en `job-description.md`.
 
